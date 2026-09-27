@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronRight, ChevronLeft } from 'lucide-react';
+import { MonclerLogo } from './MonclerLogo';
 
 interface SubCategoryItem {
   label: string;
@@ -472,10 +473,8 @@ export function MobileMenuBottomDrawer({
                 >
                   <div>
                     {/* Centered Brand Title */}
-                    <div className="text-center mb-8">
-                      <span className="font-serif tracking-[0.14em] text-[24px] font-semibold text-neutral-900 block">
-                        MONCLER
-                      </span>
+                    <div className="flex justify-center mb-8">
+                      <MonclerLogo size="md" />
                     </div>
 
                     {/* Primary Category Links with clean Right Chevrons */}

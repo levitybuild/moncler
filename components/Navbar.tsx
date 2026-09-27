@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { MonclerLogo } from './MonclerLogo';
 import { 
   MessageSquare, 
@@ -324,6 +325,9 @@ export function Navbar({
   onOpenPeaks,
   onOpenSignup,
 }: NavbarProps) {
+  const pathname = usePathname();
+  const isHeroOverlayPage = pathname === '/' || pathname === '/summer-collection';
+
   const [internalMenuOpen, setInternalMenuOpen] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
   const [scrollDirection, setScrollDirection] = useState<'up' | 'down' | null>(null);
@@ -342,7 +346,7 @@ export function Navbar({
       const currentScrollY = window.scrollY;
 
       // Close mega menu on scroll
-      if (activeMegaCategory) {
+      if (activeMegaCategory && currentScrollY > 20) {
         setActiveMegaCategory(null);
         setIsMegaMenuMounted(false);
       }
@@ -352,9 +356,9 @@ export function Navbar({
         setScrollDirection(null);
       } else {
         setIsAtTop(false);
-        if (currentScrollY > lastScrollY.current + 6) {
+        if (currentScrollY > lastScrollY.current + 4) {
           setScrollDirection('down');
-        } else if (currentScrollY < lastScrollY.current - 6) {
+        } else if (currentScrollY < lastScrollY.current - 4) {
           setScrollDirection('up');
         }
       }
@@ -375,7 +379,6 @@ export function Navbar({
   };
 
   const handleMouseLeave = () => {
-    // Slight delay before closing so user can comfortably move mouse or switch without flash
     closeTimeoutRef.current = setTimeout(() => {
       setIsNavHovered(false);
       setActiveMegaCategory(null);
@@ -396,10 +399,11 @@ export function Navbar({
   };
 
   // Determine if navbar is in white/ivory mode
-  const isWhiteMode =
-    Boolean(activeMegaCategory) ||
-    (!isAtTop && scrollDirection === 'up') ||
-    (isAtTop && (isNavHovered || isAnnouncementHovered));
+  const isWhiteMode = !isHeroOverlayPage
+    ? true
+    : Boolean(activeMegaCategory) ||
+      (!isAtTop && scrollDirection === 'up') ||
+      (isAtTop && (isNavHovered || isAnnouncementHovered));
 
   const navLinks = [
     { label: 'New In', href: '#new-in' },
@@ -425,14 +429,16 @@ export function Navbar({
       <header
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className={`relative z-40 w-full bg-white text-black shadow-none border-b border-neutral-100 lg:border-b-0 ${
-          isAtTop
-            ? `lg:absolute lg:top-8 lg:left-0 lg:right-0 lg:transition-colors lg:duration-200 ${
-                isWhiteMode ? 'lg:bg-[#f9f9f8] lg:text-black lg:shadow-sm' : 'lg:bg-transparent lg:text-white'
-              }`
-            : `lg:fixed lg:top-0 lg:left-0 lg:right-0 lg:transition-transform lg:duration-300 lg:bg-[#f9f9f8] lg:text-black lg:border-b lg:border-neutral-200/80 lg:shadow-sm ${
-                scrollDirection === 'down' ? 'lg:-translate-y-full' : 'lg:translate-y-0'
-              }`
+        className={`z-40 w-full transition-all duration-300 shadow-none ${
+          isHeroOverlayPage
+            ? isAtTop
+              ? `absolute top-0 sm:top-8 left-0 right-0 border-none ${
+                  isWhiteMode ? 'bg-[#f9f9f8] text-black' : 'bg-transparent text-white'
+                }`
+              : `fixed top-0 left-0 right-0 bg-[#f9f9f8] text-black border-none ${
+                  scrollDirection === 'down' ? '-translate-y-full' : 'translate-y-0'
+                }`
+            : 'relative bg-[#f9f9f8] text-black border-b border-neutral-200/60'
         }`}
       >
         <div className="w-full px-4 sm:px-6 lg:px-12 py-3.5 lg:py-4">
@@ -471,12 +477,7 @@ export function Navbar({
             {/* Brand Logo: Moncler (Centered on mobile and desktop) */}
             <div className="flex items-center justify-center lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-1/2 lg:-translate-y-1/2 pointer-events-auto">
               <Link href="/" className="block py-0.5">
-                <span className="lg:hidden">
-                  <MonclerLogo size="md" className="text-black" />
-                </span>
-                <span className="hidden lg:block">
-                  <MonclerLogo size="md" className={isWhiteMode ? 'text-black' : 'text-white'} />
-                </span>
+                <MonclerLogo size="md" isNegative={!isWhiteMode} />
               </Link>
             </div>
 

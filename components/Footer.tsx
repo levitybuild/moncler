@@ -571,11 +571,9 @@ export function Footer({
 
         {/* Bottom Area: Prominent Moncler Logo on Left, Country Selector with Flag, and Legal Info (No border lines) */}
         <div className="mt-20 sm:mt-28 lg:mt-32">
-          {/* Giant Moncler Brand Wordmark (Left-aligned as in screenshot) */}
-          <div className="select-none mb-10 sm:mb-12">
-            <h2 className="font-serif-luxury text-white text-5xl sm:text-6xl md:text-7xl lg:text-[76px] tracking-[0.06em] font-light leading-none">
-              MONCLER
-            </h2>
+          {/* Giant Moncler Brand Wordmark */}
+          <div className="select-none mb-10 sm:mb-12 flex items-center">
+            <MonclerLogo size="footer" isNegative />
           </div>
 
           {/* Region / Country Selector with Flag & Legal Links */}

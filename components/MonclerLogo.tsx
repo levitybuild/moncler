@@ -1,38 +1,33 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react';
 
 interface MonclerLogoProps {
   className?: string;
   size?: 'sm' | 'md' | 'lg' | 'hero' | 'footer';
+  isNegative?: boolean;
 }
 
-export function MonclerLogo({ className = '', size = 'md' }: MonclerLogoProps) {
-  // Moncler wordmark styling: flare serif, bold, tracked uppercase
-  if (size === 'footer') {
-    return (
-      <div className={`w-full select-none ${className}`}>
-        <span
-          className="font-brand block text-left lg:text-center font-bold text-[46px] sm:text-[72px] md:text-[110px] lg:text-[144px] leading-none text-white uppercase"
-          style={{ letterSpacing: '0.18em' }}
-        >
-          MONCLER
-        </span>
-      </div>
-    );
-  }
+const LOGO_SRC = 'https://i.ibb.co/Q7v1T1Hg/IMG-20260925-WA0001.jpg';
+
+export function MonclerLogo({ className = '', size = 'md', isNegative = false }: MonclerLogoProps) {
+  const isInv = isNegative || className.includes('invert');
 
   const sizeClasses = {
-    sm: 'text-lg tracking-[0.2em]',
-    md: 'text-xl sm:text-2xl tracking-[0.22em]',
-    lg: 'text-3xl sm:text-4xl tracking-[0.24em]',
-    hero: 'text-2xl sm:text-3xl md:text-4xl tracking-[0.26em]',
+    sm: 'h-4 sm:h-5',
+    md: 'h-6 sm:h-7 md:h-8',
+    lg: 'h-8 sm:h-10 md:h-12',
+    hero: 'h-10 sm:h-12 md:h-16',
+    footer: 'h-12 sm:h-16 md:h-20 lg:h-24',
   };
 
   return (
-    <span
-      className={`font-brand font-bold uppercase transition-opacity duration-200 hover:opacity-90 inline-block text-center ${sizeClasses[size]} ${className}`}
-      style={{ letterSpacing: '0.22em' }}
-    >
-      MONCLER
-    </span>
+    <img
+      src={LOGO_SRC}
+      alt="Moncler Logo"
+      className={`w-auto object-contain transition-all duration-200 select-none ${sizeClasses[size]} ${
+        isInv ? 'invert mix-blend-screen' : 'mix-blend-multiply'
+      } ${className}`}
+      referrerPolicy="no-referrer"
+    />
   );
 }

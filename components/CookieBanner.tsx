@@ -60,40 +60,40 @@ export function CookieBanner({ isOpen, onClose, onOpenPrivacyPolicy }: CookieBan
     <>
       {/* Dimmed backdrop ensuring scroll restriction and visual focus */}
       <div 
-        className="fixed inset-0 z-40 bg-black/40 backdrop-blur-[1px] transition-opacity"
+        className="fixed inset-0 z-[90] bg-black/40 backdrop-blur-[1px] transition-opacity"
         aria-hidden="true"
       />
 
-      {/* Main Cookie Banner at the bottom of the page */}
+      {/* Main Cookie Banner at the bottom of the page - High z-index above bottom nav */}
       <section
         role="dialog"
         aria-modal="true"
         aria-labelledby="cookie-heading"
-        className="fixed bottom-0 left-0 right-0 z-50 bg-white text-neutral-900 border-t border-neutral-200 shadow-2xl p-5 sm:p-7 lg:p-8 max-h-[85vh] overflow-y-auto"
+        className="fixed bottom-0 left-0 right-0 z-[100] bg-white text-neutral-900 border-t border-neutral-200 shadow-2xl p-4 sm:p-7 lg:p-8 max-h-[85vh] overflow-y-auto"
       >
         <div className="max-w-7xl mx-auto">
           {/* Top row: Continue without accepting */}
-          <div className="flex justify-end mb-2 sm:mb-3">
+          <div className="flex justify-end mb-1.5 sm:mb-3">
             <button
               type="button"
               onClick={handleContinueWithoutAccepting}
-              className="text-[11px] sm:text-xs font-semibold tracking-wider uppercase underline underline-offset-4 text-neutral-900 hover:text-neutral-600 transition-colors cursor-pointer"
+              className="text-[10px] sm:text-xs font-semibold tracking-wider uppercase underline underline-offset-4 text-neutral-900 hover:text-neutral-600 transition-colors cursor-pointer"
             >
               CONTINUE WITHOUT ACCEPTING
             </button>
           </div>
 
-          <div className="flex flex-col md:flex-row items-stretch md:items-end justify-between gap-6 lg:gap-8">
-            {/* Title & Explanatory Text (12px font size and takes 50% width) */}
+          <div className="flex flex-col md:flex-row items-stretch md:items-end justify-between gap-4 sm:gap-6 lg:gap-8">
+            {/* Title & Explanatory Text */}
             <div className="w-full md:w-1/2 lg:w-1/2">
               <h2
                 id="cookie-heading"
-                className="text-xl sm:text-2xl font-light tracking-tight text-neutral-900 mb-3"
+                className="text-lg sm:text-2xl font-light tracking-tight text-neutral-900 mb-2 sm:mb-3"
               >
                 Cookie Settings
               </h2>
-              <div className="text-[12px] leading-relaxed text-neutral-700 font-normal">
-                <p className="text-[12px]">
+              <div className="text-[10px] sm:text-[12px] leading-[1.35] sm:leading-relaxed text-neutral-700 font-normal">
+                <p className="text-[10px] sm:text-[12px]">
                   This website — www.moncler.com — uses both first- and third-party cookies and
                   tracking technologies, and may, with the user&apos;s consent, use marketing and
                   profiling cookies, including of third parties, in order to: personalise the
@@ -121,11 +121,11 @@ export function CookieBanner({ isOpen, onClose, onOpenPrivacyPolicy }: CookieBan
             </div>
 
             {/* Desktop & Mobile Buttons - positioned at the bottom of the section */}
-            <div className="flex flex-col sm:flex-row items-stretch md:items-end justify-end gap-3 self-end w-full md:w-auto shrink-0">
+            <div className="flex flex-col sm:flex-row items-stretch md:items-end justify-end gap-2.5 sm:gap-3 self-end w-full md:w-auto shrink-0">
               <button
                 type="button"
                 onClick={handleAcceptAll}
-                className="w-full sm:w-auto px-6 lg:px-8 py-3.5 bg-black text-white text-[11px] sm:text-xs font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-colors text-center cursor-pointer rounded-none whitespace-nowrap"
+                className="w-full sm:w-auto px-5 lg:px-8 py-2.5 sm:py-3.5 bg-black text-white text-[10px] sm:text-xs font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-colors text-center cursor-pointer rounded-none whitespace-nowrap"
               >
                 ACCEPT ALL
               </button>
@@ -133,7 +133,7 @@ export function CookieBanner({ isOpen, onClose, onOpenPrivacyPolicy }: CookieBan
               <button
                 type="button"
                 onClick={() => setShowPreferencesModal(true)}
-                className="w-full sm:w-auto px-5 lg:px-6 py-3.5 bg-black text-white text-[11px] sm:text-xs font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-colors text-center cursor-pointer rounded-none whitespace-nowrap"
+                className="w-full sm:w-auto px-4 lg:px-6 py-2.5 sm:py-3.5 bg-black text-white text-[10px] sm:text-xs font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-colors text-center cursor-pointer rounded-none whitespace-nowrap"
               >
                 PERSONALISE COOKIE CHOICES
               </button>
@@ -144,7 +144,7 @@ export function CookieBanner({ isOpen, onClose, onOpenPrivacyPolicy }: CookieBan
 
       {/* Preferences Modal (When Personalise Cookie Choices is clicked) */}
       {showPreferencesModal && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
           <div
             className="fixed inset-0 bg-black/60 backdrop-blur-sm"
             onClick={() => setShowPreferencesModal(false)}
