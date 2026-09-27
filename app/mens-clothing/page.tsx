@@ -10,6 +10,7 @@ import { ValuePropositionBar } from '@/components/ValuePropositionBar';
 import { Footer } from '@/components/Footer';
 import { Modals } from '@/components/Modals';
 import { MobileFloatingBar } from '@/components/MobileFloatingBar';
+import { FragmentCampaignSection } from '@/components/FragmentCampaignSection';
 
 // Generated asset paths for menswear campaign
 import mensOuterwearImg from '@/src/assets/images/mens_outerwear_hooded_1790463189204.jpg';
@@ -286,82 +287,11 @@ export default function MensClothingPage() {
         </div>
       </section>
 
-      {/* 4. Current Expressions / Moncler x Fragment Section */}
-      <section className="w-full bg-[#f6f6f4] py-14 sm:py-20 lg:py-24 px-6 sm:px-10 lg:px-16 text-center">
-        <div className="max-w-[1400px] mx-auto">
-          {/* Desktop & Mobile Headings */}
-          <div className="max-w-2xl mx-auto mb-10 sm:mb-14">
-            <h2 className="text-[26px] sm:text-[32px] lg:text-[36px] font-normal tracking-tight text-neutral-900 font-serif mb-3">
-              Current Expressions
-            </h2>
-            <h3 className="text-[15px] sm:text-[17px] font-medium tracking-wide text-neutral-900 mb-2">
-              Moncler x Fragment by Hiroshi Fujiwara
-            </h3>
-            <p className="text-[13px] sm:text-[14px] text-neutral-600 font-light leading-[1.65]">
-              Japanese influences and American vintage references come together in a collection shaped by contrast and continuity.
-            </p>
-          </div>
-
-          {/* 3-Image Triptych Display */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-10 items-center">
-            {/* Left Image: Brown jacket detail */}
-            <div className="relative aspect-[4/5] bg-neutral-200 overflow-hidden group">
-              <Image
-                src={brownJacketCloseImg}
-                alt="Current Expressions - Moncler Brown Down Jacket Close-up"
-                fill
-                sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                referrerPolicy="no-referrer"
-              />
-            </div>
-
-            {/* Center Image: Fragment velvet jacket (Elevated focal point) */}
-            <div className="relative aspect-[4/5] bg-white overflow-hidden shadow-sm group">
-              <Image
-                src={fragmentVelvetImg}
-                alt="Moncler x Fragment Hiroshi Fujiwara Velvet Jacket"
-                fill
-                sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                referrerPolicy="no-referrer"
-              />
-            </div>
-
-            {/* Right Image: Boot close-up */}
-            <div className="relative aspect-[4/5] bg-neutral-200 overflow-hidden group">
-              <Image
-                src={bootCloseImg}
-                alt="Current Expressions - Moncler Lug Boot Detail"
-                fill
-                sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                referrerPolicy="no-referrer"
-              />
-            </div>
-          </div>
-
-          {/* Action Links */}
-          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8">
-            <button
-              type="button"
-              onClick={() => setIsSignupOpen(true)}
-              className="group inline-flex items-center gap-1.5 text-[12px] tracking-[0.16em] uppercase text-neutral-900 font-medium hover:opacity-75 transition-opacity cursor-pointer"
-            >
-              <span>SHOP NOW</span>
-              <ChevronRight className="w-3.5 h-3.5 stroke-[2] transition-transform duration-200 group-hover:translate-x-0.5" />
-            </button>
-            <button
-              type="button"
-              onClick={() => setIsPeaksOpen(true)}
-              className="group inline-flex items-center gap-1.5 text-[12px] tracking-[0.16em] uppercase text-neutral-900 font-medium hover:opacity-75 transition-opacity cursor-pointer"
-            >
-              <span>DISCOVER MORE</span>
-              <ChevronRight className="w-3.5 h-3.5 stroke-[2] transition-transform duration-200 group-hover:translate-x-0.5" />
-            </button>
-          </div>
-        </div>
-      </section>
+      {/* 4. Moncler x Fragment by Hiroshi Fujiwara Interactive Campaign Stage */}
+      <FragmentCampaignSection
+        onShopNow={() => setIsSignupOpen(true)}
+        onDiscoverMore={() => setIsPeaksOpen(true)}
+      />
 
       {/* 5. Curated Compositions (Dress Picker from Homepage reused & styled for Menswear) */}
       <section className="w-full bg-[#f9f9f8] relative py-14 sm:py-20 lg:py-24 overflow-hidden border-t border-neutral-100">

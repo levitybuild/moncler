@@ -7,8 +7,7 @@ import {
   Plus, 
   Minus, 
   ChevronRight, 
-  ChevronLeft, 
-  Search
+  ChevronLeft
 } from 'lucide-react';
 import { AnnouncementBar } from '@/components/AnnouncementBar';
 import { Navbar } from '@/components/Navbar';
@@ -47,30 +46,20 @@ const FAQ_DATA: FaqCategory[] = [
     items: [
       {
         id: 'shop-1',
-        question: 'How do I find the right size?',
+        question: 'How do I place an order on Moncler.com?',
         answer: (
-          <div className="space-y-3">
-            <p>
-              On every product page, you can find a dedicated Size Guide with detailed measurements for chest, waist, and hips in centimeters and inches.
-            </p>
-            <p>
-              You can also contact our Client Advisors via Live Chat, WhatsApp, or Phone for personalized styling and fit recommendations.
-            </p>
-          </div>
+          <p>
+            Browse our catalogue, select your preferred item and size, then click &ldquo;Add to Shopping Bag&rdquo;. Follow the straightforward checkout steps to confirm your shipping destination and payment details.
+          </p>
         ),
       },
       {
         id: 'shop-2',
         question: 'Can I cancel or modify my order?',
         answer: (
-          <div className="space-y-3">
-            <p>
-              Due to our fast processing times, once an order is confirmed it enters our logistics flow immediately. If you need to make changes or cancel, please contact Client Service as quickly as possible.
-            </p>
-            <p>
-              If the order has already been dispatched, you may return the items free of charge once received.
-            </p>
-          </div>
+          <p>
+            Due to our expedited processing times, orders enter logistics swiftly once confirmed. Please reach out to our Client Service team immediately if you wish to adjust or cancel your order.
+          </p>
         ),
       },
       {
@@ -78,7 +67,7 @@ const FAQ_DATA: FaqCategory[] = [
         question: 'Is gift packaging available?',
         answer: (
           <p>
-            All Moncler orders are delivered in signature luxury packaging. During checkout, you may also add a complimentary personalized gift message.
+            All Moncler purchases are delivered in signature luxury packaging. You may also add a complimentary personal message during checkout.
           </p>
         ),
       },
@@ -91,20 +80,11 @@ const FAQ_DATA: FaqCategory[] = [
     items: [
       {
         id: 'size-1',
-        question: 'How do Moncler numeric sizes correspond to standard sizing?',
+        question: 'How do Moncler numeric sizes correspond to international sizing?',
         answer: (
-          <div className="space-y-3">
-            <p>
-              Moncler outerwear generally uses a 00 to 7 numeric scale:
-            </p>
-            <ul className="list-disc pl-5 space-y-1 text-[13.5px]">
-              <li>Size 0 = XS / UK 6 / US 2</li>
-              <li>Size 1 = S / UK 8 / US 4</li>
-              <li>Size 2 = M / UK 10 / US 6</li>
-              <li>Size 3 = L / UK 12 / US 8</li>
-              <li>Size 4 = XL / UK 14 / US 10</li>
-              <li>Size 5 = XXL / UK 16 / US 12</li>
-            </ul>
+          <div className="space-y-2">
+            <p>Moncler outerwear uses a 00 to 7 numeric scale:</p>
+            <p>Size 0 = XS / UK 6 / US 2 &bull; Size 1 = S / UK 8 / US 4 &bull; Size 2 = M / UK 10 / US 6 &bull; Size 3 = L / UK 12 / US 8 &bull; Size 4 = XL / UK 14 / US 10</p>
           </div>
         ),
       },
@@ -113,7 +93,7 @@ const FAQ_DATA: FaqCategory[] = [
         question: 'What is the difference between Regular, Slim, and Loose fit?',
         answer: (
           <p>
-            Each product page outlines the cut of the garment. Slim fits are tailored closer to the silhouette, Regular fits provide classic comfort with room for light knitwear underneath, while Loose fits feature modern oversized volumes.
+            Slim fit models are tailored close to the body, Regular fit provides classic comfort with layering room, and Loose fit features contemporary oversized silhouettes.
           </p>
         ),
       },
@@ -130,10 +110,10 @@ const FAQ_DATA: FaqCategory[] = [
         answer: (
           <div className="space-y-3">
             <p>
-              We accept all major credit and debit cards (Visa, Mastercard, American Express, Maestro, UnionPay, JCB), as well as Apple Pay, Google Pay, PayPal, Klarna (Pay in 3 / Pay Later), and Moncler Gift Cards.
+              We accept all major credit and debit cards (Visa, MasterCard, American Express, Maestro, UnionPay, JCB), as well as Apple Pay, Google Pay, PayPal, Klarna, and Moncler Gift Cards.
             </p>
             <p>
-              All transactions are encrypted and processed through certified secure payment gateways.
+              All online transactions are encrypted and processed through certified secure payment gateways.
             </p>
           </div>
         ),
@@ -143,7 +123,7 @@ const FAQ_DATA: FaqCategory[] = [
         question: 'Are payments secure?',
         answer: (
           <p>
-            Yes. Every transaction is processed through SSL encryption and 3D Secure verification protocol. Moncler does not store your full card number or CVV code on its servers.
+            Yes. Every transaction is protected with advanced SSL encryption and 3D Secure verification protocol. Moncler never stores your full card number or security code.
           </p>
         ),
       },
@@ -151,12 +131,12 @@ const FAQ_DATA: FaqCategory[] = [
         id: 'pay-3',
         question: 'My order is not being accepted. Why?',
         answer: (
-          <div className="space-y-3">
+          <div className="space-y-2">
             <p>
-              Payment authorization can occasionally be declined by your issuing bank for security checks, incorrect billing address details, or insufficient funds.
+              Payment authorisations may occasionally be declined by your bank due to automated security triggers, mismatched billing address information, or daily transaction limits.
             </p>
             <p>
-              Please verify that the billing address entered matches the exact address registered with your payment provider, or try an alternative payment method like PayPal or Apple Pay.
+              Please ensure your billing address matches your payment method registry, or select an alternative payment method such as PayPal or Apple Pay.
             </p>
           </div>
         ),
@@ -165,12 +145,12 @@ const FAQ_DATA: FaqCategory[] = [
         id: 'pay-4',
         question: 'Is VAT included in the final price?',
         answer: (
-          <div className="space-y-3">
+          <div className="space-y-2">
             <p>
-              All prices include VAT. At this time we are unable to provide tax refunds for purchases made on <Link href="/" className="underline underline-offset-2 decoration-1 text-neutral-900 hover:opacity-75">Moncler.com</Link>.
+              All prices shown on Moncler.com include value added tax (VAT). At this time, we are unable to process tax-free refunds for purchases completed online.
             </p>
             <p>
-              Kindly note that all orders placed online must be related to private purchases. Order invoices can only be issued to private individuals.
+              Kindly note that online orders are reserved for private retail purchases.
             </p>
           </div>
         ),
@@ -186,22 +166,115 @@ const FAQ_DATA: FaqCategory[] = [
         id: 'ship-1',
         question: 'What are the delivery times and shipping costs?',
         answer: (
-          <div className="space-y-3">
-            <p>
-              We offer Complimentary Standard Shipping (2-4 business days) on all orders. Express Delivery (1-2 business days) and Same Day Delivery in select metropolitan areas are available at checkout.
-            </p>
-            <p>
-              All packages are fully insured and require an adult signature upon delivery.
-            </p>
-          </div>
+          <p>
+            We provide Complimentary Standard Shipping (2-4 business days) on all orders. Express Shipping (1-2 business days) is also available at checkout.
+          </p>
         ),
       },
       {
         id: 'ship-2',
-        question: 'Can I choose Click & Collect in a Moncler Boutique?',
+        question: 'Can I choose Pick Up in Boutique?',
         answer: (
           <p>
-            Yes. You can select Pick Up in Boutique at checkout to collect your parcel from your preferred Moncler boutique free of charge. You will receive an email confirmation once your parcel is ready for collection.
+            Yes. Select &ldquo;Pick Up in Boutique&rdquo; at checkout to collect your parcel from any participating Moncler flagship at your convenience.
+          </p>
+        ),
+      },
+    ],
+  },
+  {
+    id: 'exchanges-returns',
+    name: 'Exchanges and Returns',
+    tagline: 'Return requests, prepaid labels and exchanges.',
+    items: [
+      {
+        id: 'ret-1',
+        question: 'How do I return an item?',
+        answer: (
+          <p>
+            You have 20 calendar days from delivery to request a return. Use the pre-printed prepaid return label included in your parcel or generate a digital return slip in your account.
+          </p>
+        ),
+      },
+      {
+        id: 'ret-2',
+        question: 'Can I exchange my item for a different size or color?',
+        answer: (
+          <p>
+            Yes, subject to stock availability. You can request an exchange online through your order history or visit any Moncler boutique.
+          </p>
+        ),
+      },
+    ],
+  },
+  {
+    id: 'aftercare',
+    name: 'Product Aftercare',
+    tagline: 'Care, cleaning, repairs and garment preservation.',
+    items: [
+      {
+        id: 'care-1',
+        question: 'How should I clean and store my Moncler down jacket?',
+        answer: (
+          <p>
+            We recommend professional gentle dry cleaning by a specialized luxury outerwear cleaner. Store your jacket on a wide hanger in a cool, dry environment away from direct sunlight.
+          </p>
+        ),
+      },
+      {
+        id: 'care-2',
+        question: 'Does Moncler provide garment repair services?',
+        answer: (
+          <p>
+            Yes. Our boutiques and certified repair ateliers provide zipper replacements, patch repairs, and authentic hardware restoration.
+          </p>
+        ),
+      },
+    ],
+  },
+  {
+    id: 'boutique-services',
+    name: 'Boutique Services',
+    tagline: 'Private appointments, personal styling and click & collect.',
+    items: [
+      {
+        id: 'boutique-1',
+        question: 'How can I book a private boutique appointment?',
+        answer: (
+          <p>
+            You can book a one-on-one personal styling appointment online through our Boutique Locator or by contacting our Client Advisors.
+          </p>
+        ),
+      },
+    ],
+  },
+  {
+    id: 'gift-card',
+    name: 'Gift Card',
+    tagline: 'Purchasing and redeeming Moncler physical and digital gift cards.',
+    items: [
+      {
+        id: 'gift-1',
+        question: 'How do I redeem a Moncler Gift Card?',
+        answer: (
+          <p>
+            Enter your 16-digit gift card number and PIN in the payment section during online checkout, or present the card to an advisor at any Moncler boutique.
+          </p>
+        ),
+      },
+    ],
+  },
+  {
+    id: 'account-privacy',
+    name: 'My Account and Privacy',
+    tagline: 'Managing your profile, password and privacy preferences.',
+    items: [
+      {
+        id: 'acc-1',
+        question: 'How do I create or manage my Moncler account?',
+        answer: (
+          <p>
+            Click the account icon in the header to register or log in. From your dashboard, you can track orders, save wishlists, manage addresses, and update communication preferences.
           </p>
         ),
       },
@@ -215,29 +288,28 @@ const POPULAR_TOPICS = [
     title: 'Shipping',
     description: 'Delivery methods and shipping options.',
     cta: 'EXPLORE SHIPPING',
-    image: '/images/client-service/order-management.jpg',
+    image: '/images/client-service/shipping-boxes.jpg',
     targetCat: 'shipping',
   },
   {
     id: 'exchanges-topic',
     title: 'Exchanges & Returns',
-    description: 'Easy exchanges and returns online and in-store.',
+    description: 'Easy exchanges and returns online and in-store',
     cta: 'EXPLORE EXCHANGES & RETURNS',
-    image: '/images/client-service/boutique-services.jpg',
-    targetCat: 'shopping',
+    image: '/images/client-service/exchanges-bag.jpg',
+    targetCat: 'exchanges-returns',
   },
   {
     id: 'aftercare-topic',
     title: 'Product Aftercare',
-    description: 'Care and support for your Moncler pieces.',
+    description: 'Care and support for your Moncler pieces',
     cta: 'EXPLORE AFTERCARE',
     image: '/images/client-service/aftercare.jpg',
-    targetCat: 'shopping',
+    targetCat: 'aftercare',
   },
 ];
 
 export default function FaqPage() {
-  // High contrast state
   const [isHighContrast, setIsHighContrast] = useState(false);
 
   // Modals & Navigation state
@@ -249,18 +321,16 @@ export default function FaqPage() {
   const [isCountryOpen, setIsCountryOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Active Category State (Default: 'payments' as shown in screenshots)
+  // Active Category State (Default: 'payments' matching screenshot)
   const [activeCategory, setActiveCategory] = useState<string>('payments');
 
   // Search input state for FAQs
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Accordion open/close state: maps item ID to boolean
-  const [openAccordions, setOpenAccordions] = useState<Record<string, boolean>>({
-    'pay-4': true, // Default open matching screenshot
-  });
+  // Accordion open/close state
+  const [openAccordions, setOpenAccordions] = useState<Record<string, boolean>>({});
 
-  // Mobile carousel index for Popular Topics
+  // Mobile carousel index
   const [popularCarouselIndex, setPopularCarouselIndex] = useState(0);
 
   // Cart items state
@@ -304,7 +374,6 @@ export default function FaqPage() {
     return FAQ_DATA.find((c) => c.id === activeCategory) || FAQ_DATA[2];
   }, [activeCategory]);
 
-  // Filtered FAQ items if search query is typed
   const displayedFaqItems = useMemo(() => {
     if (!searchQuery.trim()) {
       return currentCategoryData.items;
@@ -318,7 +387,7 @@ export default function FaqPage() {
   return (
     <div
       className={`min-h-screen font-sans antialiased text-neutral-900 selection:bg-neutral-900 selection:text-white ${
-        isHighContrast ? 'bg-white font-medium text-black' : 'bg-[#fafafa]'
+        isHighContrast ? 'bg-white font-medium text-black' : 'bg-white'
       }`}
     >
       {/* Top Announcement Bar */}
@@ -344,63 +413,79 @@ export default function FaqPage() {
 
       <main className="w-full">
         {/* Breadcrumbs & Title Section */}
-        <div className="w-full bg-[#fafafa] border-b border-neutral-200/60">
-          <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-16 pt-6 sm:pt-10 pb-8 sm:pb-12">
-            
-            {/* Breadcrumb line */}
-            <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-[11px] sm:text-[12px] tracking-[0.15em] uppercase text-neutral-500 mb-3">
-              <Link href="/" className="hover:text-neutral-900 transition-colors">
-                HOME
-              </Link>
-              <ChevronRight className="w-3 h-3 text-neutral-400 stroke-[1.5]" />
-              <Link href="/client-service" className="hover:text-neutral-900 transition-colors">
-                CLIENT SERVICE
-              </Link>
-              <ChevronRight className="w-3 h-3 text-neutral-400 stroke-[1.5]" />
-              <span className="text-neutral-900 font-medium">
-                FAQ
-              </span>
-            </nav>
+        <div className="w-full px-6 sm:px-10 lg:px-14 xl:px-16 pt-6 sm:pt-8 pb-6 sm:pb-8">
+          {/* Breadcrumb line */}
+          <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-[11px] tracking-[0.14em] uppercase text-neutral-800 mb-3">
+            <Link href="/" className="hover:text-black transition-colors">
+              HOME
+            </Link>
+            <ChevronRight className="w-3 h-3 text-neutral-400 stroke-[1.5]" />
+            <Link href="/client-service" className="hover:text-black transition-colors">
+              CLIENT SERVICE
+            </Link>
+            <ChevronRight className="w-3 h-3 text-neutral-400 stroke-[1.5]" />
+            <span className="text-neutral-900 font-medium">
+              FAQ
+            </span>
+          </nav>
 
-            {/* Category Title & Tagline */}
-            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
-              <div>
-                <h1 className="text-[32px] sm:text-[44px] lg:text-[52px] font-normal tracking-tight text-neutral-900 font-serif leading-[1.1]">
-                  {currentCategoryData.name}
-                </h1>
-                <p className="text-[13.5px] sm:text-[14.5px] text-neutral-600 font-light mt-2 max-w-xl">
-                  {currentCategoryData.tagline}
-                </p>
-              </div>
-            </div>
-
+          {/* Category Title & Right Tagline */}
+          <div className="w-full flex flex-col md:flex-row md:items-baseline justify-between gap-2">
+            <h1 className="text-[26px] sm:text-[30px] font-normal tracking-tight text-neutral-900 leading-tight">
+              {currentCategoryData.name}
+            </h1>
+            <p className="text-[12.5px] sm:text-[13px] text-neutral-500 font-light">
+              {currentCategoryData.tagline}
+            </p>
           </div>
         </div>
 
-        {/* How Can We Help? / Search & FAQ Section */}
-        <section className="w-full bg-[#fafafa] py-10 sm:py-16">
-          <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-16">
-            
-            {/* Search Input Box */}
-            <div className="mb-10 sm:mb-14">
-              <h2 className="text-[18px] sm:text-[22px] font-normal tracking-tight text-neutral-900 mb-4">
-                How Can We Help?
-              </h2>
-              <div className="relative max-w-full">
-                <input
-                  type="text"
-                  placeholder="Search FAQs"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-transparent border-b border-neutral-300 pb-3.5 pt-1 text-[20px] sm:text-[26px] placeholder-neutral-400 font-serif font-light text-neutral-900 focus:outline-none focus:border-neutral-900 transition-colors pr-10"
-                />
-                <Search className="absolute right-2 top-2.5 w-5 h-5 text-neutral-400 stroke-[1.5]" />
-              </div>
+        {/* How Can We Help? / Search Section */}
+        <section className="w-full bg-[#f8f8f7] py-8 sm:py-10 px-6 sm:px-10 lg:px-14 xl:px-16">
+          <div className="w-full">
+            <h2 className="text-[17px] sm:text-[18px] font-normal text-neutral-900 mb-3">
+              How Can We Help?
+            </h2>
+            <div className="w-full">
+              <input
+                type="text"
+                placeholder="Search FAQs"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-transparent border-b border-neutral-300 pb-2.5 pt-0.5 text-[20px] sm:text-[22px] placeholder:text-neutral-500 font-light text-neutral-900 focus:outline-none focus:border-neutral-900 transition-colors"
+              />
             </div>
+          </div>
+        </section>
 
-            {/* Mobile Category Horizontal Tabs with Clean Underline & Fades */}
-            <div className="lg:hidden relative -mx-5 px-5 mb-8">
-              <div className="overflow-x-auto no-scrollbar flex items-center gap-6 sm:gap-8 pb-3 whitespace-nowrap scroll-smooth">
+        {/* Mobile Horizontal Category Tabs */}
+        <div className="lg:hidden w-full px-6 pt-6 pb-2 overflow-x-auto no-scrollbar flex items-center gap-6 whitespace-nowrap border-b border-neutral-200">
+          {FAQ_DATA.map((cat) => (
+            <button
+              key={cat.id}
+              type="button"
+              onClick={() => {
+                setActiveCategory(cat.id);
+                setSearchQuery('');
+              }}
+              className={`text-[13px] pb-2 transition-colors shrink-0 cursor-pointer ${
+                activeCategory === cat.id
+                  ? 'text-neutral-900 font-medium border-b border-neutral-900'
+                  : 'text-neutral-500 hover:text-neutral-900 font-light'
+              }`}
+            >
+              {cat.name}
+            </button>
+          ))}
+        </div>
+
+        {/* Side Categories & Centered Accordion */}
+        <section className="w-full px-6 sm:px-10 lg:px-14 xl:px-16 py-10 sm:py-14">
+          <div className="w-full relative min-h-[380px] lg:flex lg:justify-center">
+            
+            {/* Desktop Left Categories Column pinned to the left margin */}
+            <aside className="hidden lg:block lg:absolute lg:left-0 lg:top-0 lg:w-[22%]">
+              <nav aria-label="FAQ categories" className="flex flex-col space-y-3.5">
                 {FAQ_DATA.map((cat) => (
                   <button
                     key={cat.id}
@@ -409,76 +494,51 @@ export default function FaqPage() {
                       setActiveCategory(cat.id);
                       setSearchQuery('');
                     }}
-                    className={`text-[14px] sm:text-[15px] tracking-wide transition-colors shrink-0 cursor-pointer ${
+                    className={`text-[13.5px] tracking-normal text-left transition-colors cursor-pointer w-fit ${
                       activeCategory === cat.id
-                        ? 'text-neutral-900 font-medium underline underline-offset-8 decoration-1 decoration-neutral-900'
-                        : 'text-neutral-500 hover:text-neutral-900 font-light'
+                        ? 'text-neutral-900 font-medium underline underline-offset-4 decoration-1 decoration-neutral-900'
+                        : 'text-neutral-900 font-light hover:underline underline-offset-4'
                     }`}
                   >
                     {cat.name}
                   </button>
                 ))}
-              </div>
-            </div>
+              </nav>
+            </aside>
 
-            {/* Desktop Layout: Left Category Tabs + Right Accordion List */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-              
-              {/* Desktop Left Categories Column */}
-              <aside className="hidden lg:block lg:col-span-3 space-y-4 pt-1">
-                <nav aria-label="FAQ categories" className="space-y-4">
-                  {FAQ_DATA.map((cat) => (
-                    <button
-                      key={cat.id}
-                      type="button"
-                      onClick={() => {
-                        setActiveCategory(cat.id);
-                        setSearchQuery('');
-                      }}
-                      className={`text-[14px] tracking-wide block text-left transition-colors cursor-pointer w-full ${
-                        activeCategory === cat.id
-                          ? 'text-neutral-900 font-medium underline underline-offset-8 decoration-1 decoration-neutral-900'
-                          : 'text-neutral-500 hover:text-neutral-900 font-light'
-                      }`}
-                    >
-                      {cat.name}
-                    </button>
-                  ))}
-                </nav>
-              </aside>
-
-              {/* FAQ Accordion List (Right Column) */}
-              <div className="lg:col-span-9 max-w-[880px] divide-y divide-neutral-200 border-t border-b border-neutral-200">
+            {/* Accordion centered in the middle of the screen */}
+            <div className="w-full lg:w-[50%]">
+              <div className="divide-y divide-neutral-200 border-t border-b border-neutral-200">
                 {displayedFaqItems.length === 0 ? (
-                  <div className="py-10 text-neutral-500 font-light text-[14.5px]">
-                    No FAQs found matching &ldquo;{searchQuery}&rdquo;. Try another keyword or contact our Client Advisors.
+                  <div className="py-8 text-neutral-500 font-light text-[13.5px]">
+                    No FAQs found matching &ldquo;{searchQuery}&rdquo;.
                   </div>
                 ) : (
                   displayedFaqItems.map((item) => {
                     const isOpen = !!openAccordions[item.id];
                     return (
-                      <div key={item.id} className="py-4 sm:py-5 transition-colors">
+                      <div key={item.id} className="transition-colors">
                         <button
                           type="button"
                           onClick={() => toggleAccordion(item.id)}
-                          className="w-full flex items-center justify-between text-left group cursor-pointer focus:outline-none"
+                          className="w-full py-4 flex items-center justify-between text-left group cursor-pointer focus:outline-none"
                           aria-expanded={isOpen}
                         >
-                          <span className="text-[14px] sm:text-[15.5px] font-light text-neutral-900 group-hover:text-black transition-colors pr-6">
+                          <span className="text-[13.5px] sm:text-[14px] font-light text-neutral-900 pr-6">
                             {item.question}
                           </span>
-                          <span className="shrink-0 text-neutral-700 group-hover:text-black transition-transform duration-200">
+                          <span className="shrink-0 text-neutral-800">
                             {isOpen ? (
-                              <Minus className="w-4 h-4 stroke-[1.5]" />
+                              <Minus className="w-3.5 h-3.5 stroke-[1.25]" />
                             ) : (
-                              <Plus className="w-4 h-4 stroke-[1.5]" />
+                              <Plus className="w-3.5 h-3.5 stroke-[1.25]" />
                             )}
                           </span>
                         </button>
 
-                        {/* Accordion Content */}
+                        {/* Accordion Body */}
                         {isOpen && (
-                          <div className="pt-3.5 pb-2 text-[13.5px] sm:text-[14.5px] text-neutral-600 font-light leading-[1.8] animate-in fade-in duration-200">
+                          <div className="pb-4 pt-1 text-[13px] sm:text-[13.5px] text-neutral-600 font-light leading-relaxed">
                             {item.answer}
                           </div>
                         )}
@@ -487,209 +547,198 @@ export default function FaqPage() {
                   })
                 )}
               </div>
-
             </div>
+
           </div>
         </section>
 
         {/* Explore Popular Topics Section */}
-        <section className="w-full bg-[#fafafa] pt-10 sm:pt-16 pb-14 sm:pb-20 border-t border-neutral-200/60">
-          <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-16">
-            
-            <div className="flex items-center justify-between mb-8 sm:mb-12">
-              <h2 className="text-[20px] sm:text-[26px] font-normal tracking-tight text-neutral-900 font-serif">
-                Explore Popular Topics
-              </h2>
-              <button
-                type="button"
-                onClick={() => {
-                  window.scrollTo({ top: 200, behavior: 'smooth' });
-                }}
-                className="group inline-flex items-center gap-1.5 text-[11px] sm:text-[12px] uppercase tracking-[0.14em] text-neutral-900 font-medium hover:opacity-75 transition-opacity cursor-pointer"
-              >
-                <span>BROWSE ALL TOPICS</span>
-                <ChevronRight className="w-3.5 h-3.5 stroke-[2] transition-transform duration-200 group-hover:translate-x-0.5" />
-              </button>
-            </div>
+        <section className="w-full px-6 sm:px-10 lg:px-14 xl:px-16 pt-10 sm:pt-14 pb-14 sm:pb-16 border-t border-neutral-200">
+          <div className="w-full flex items-center justify-between mb-6">
+            <h2 className="text-[17px] sm:text-[18px] font-normal text-neutral-900">
+              Explore Popular Topics
+            </h2>
+            <button
+              type="button"
+              onClick={() => {
+                window.scrollTo({ top: 180, behavior: 'smooth' });
+              }}
+              className="group inline-flex items-center gap-1 text-[11px] uppercase tracking-[0.14em] text-neutral-900 font-medium hover:opacity-75 transition-opacity cursor-pointer"
+            >
+              <span>BROWSE ALL TOPICS</span>
+              <ChevronRight className="w-3 h-3 stroke-[2]" />
+            </button>
+          </div>
 
-            {/* Desktop 3-Card Grid */}
-            <div className="hidden lg:grid lg:grid-cols-3 gap-8">
-              {POPULAR_TOPICS.map((topic) => (
-                <div key={topic.id} className="group flex flex-col justify-between">
-                  <div>
-                    <div className="relative aspect-[16/10] w-full overflow-hidden bg-neutral-100 mb-4">
-                      <Image
-                        src={topic.image}
-                        alt={topic.title}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                    </div>
-                    <h3 className="text-[17px] font-normal text-neutral-900 mb-1.5">
-                      {topic.title}
-                    </h3>
-                    <p className="text-[13px] text-neutral-600 font-light mb-4 leading-relaxed">
-                      {topic.description}
-                    </p>
+          {/* Desktop 3-Card Grid with .2em gap */}
+          <div className="hidden lg:grid lg:grid-cols-3 lg:gap-[0.2em]">
+            {POPULAR_TOPICS.map((topic) => (
+              <div key={topic.id} className="flex flex-col justify-between">
+                <div>
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-neutral-100 mb-3">
+                    <Image
+                      src={topic.image}
+                      alt={topic.title}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
+                  <h3 className="text-[15px] font-normal text-neutral-900 mb-1">
+                    {topic.title}
+                  </h3>
+                  <p className="text-[12.5px] text-neutral-600 font-light mb-3">
+                    {topic.description}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveCategory(topic.targetCat);
+                    window.scrollTo({ top: 220, behavior: 'smooth' });
+                  }}
+                  className="inline-flex items-center gap-1 text-[10.5px] uppercase tracking-[0.14em] text-neutral-900 font-medium hover:opacity-75 transition-opacity cursor-pointer text-left"
+                >
+                  <span>{topic.cta}</span>
+                  <ChevronRight className="w-3 h-3 stroke-[2]" />
+                </button>
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile Carousel View */}
+          <div className="lg:hidden">
+            <div className="overflow-x-auto no-scrollbar flex gap-4 snap-x snap-mandatory pb-3">
+              {POPULAR_TOPICS.map((topic) => (
+                <div key={topic.id} className="min-w-[80vw] sm:min-w-[50vw] snap-center">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-neutral-100 mb-3">
+                    <Image
+                      src={topic.image}
+                      alt={topic.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <h3 className="text-[15px] font-normal text-neutral-900 mb-1">
+                    {topic.title}
+                  </h3>
+                  <p className="text-[12.5px] text-neutral-600 font-light mb-3">
+                    {topic.description}
+                  </p>
                   <button
                     type="button"
                     onClick={() => {
                       setActiveCategory(topic.targetCat);
-                      window.scrollTo({ top: 250, behavior: 'smooth' });
+                      window.scrollTo({ top: 180, behavior: 'smooth' });
                     }}
-                    className="group/btn inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.14em] text-neutral-900 font-medium hover:opacity-75 transition-opacity cursor-pointer text-left"
+                    className="inline-flex items-center gap-1 text-[10.5px] uppercase tracking-[0.14em] text-neutral-900 font-medium hover:opacity-75 transition-opacity cursor-pointer"
                   >
                     <span>{topic.cta}</span>
-                    <ChevronRight className="w-3.5 h-3.5 stroke-[2] transition-transform duration-200 group-hover/btn:translate-x-0.5" />
+                    <ChevronRight className="w-3 h-3 stroke-[2]" />
                   </button>
                 </div>
               ))}
             </div>
 
-            {/* Mobile Carousel View matching screenshot with Pagination Bar */}
-            <div className="lg:hidden">
-              <div className="overflow-x-auto no-scrollbar flex gap-5 snap-x snap-mandatory pb-4">
-                {POPULAR_TOPICS.map((topic) => (
-                  <div key={topic.id} className="min-w-[82vw] sm:min-w-[50vw] snap-center group">
-                    <div className="relative aspect-[16/10] w-full overflow-hidden bg-neutral-100 mb-4">
-                      <Image
-                        src={topic.image}
-                        alt={topic.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <h3 className="text-[16px] font-normal text-neutral-900 mb-1">
-                      {topic.title}
-                    </h3>
-                    <p className="text-[12.5px] text-neutral-600 font-light mb-3 leading-relaxed">
-                      {topic.description}
-                    </p>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setActiveCategory(topic.targetCat);
-                        window.scrollTo({ top: 180, behavior: 'smooth' });
-                      }}
-                      className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.14em] text-neutral-900 font-medium hover:opacity-75 transition-opacity cursor-pointer"
-                    >
-                      <span>{topic.cta}</span>
-                      <ChevronRight className="w-3.5 h-3.5 stroke-[2]" />
-                    </button>
-                  </div>
-                ))}
-              </div>
-
-              {/* Carousel Navigation Indicator Strip (Matching Screenshot) */}
-              <div className="flex items-center justify-between pt-6 max-w-[280px] mx-auto text-neutral-400">
-                <button
-                  type="button"
-                  onClick={() => setPopularCarouselIndex((prev) => Math.max(0, prev - 1))}
-                  className="p-1 hover:text-neutral-900 cursor-pointer"
-                  aria-label="Previous topic"
-                >
-                  <ChevronLeft className="w-4 h-4 stroke-[1.5]" />
-                </button>
-                
-                {/* Horizontal progress bar */}
-                <div className="flex-1 mx-4 h-[1.5px] bg-neutral-300 relative overflow-hidden">
-                  <div 
-                    className="absolute top-0 bottom-0 bg-neutral-900 transition-all duration-300"
-                    style={{
-                      left: `${(popularCarouselIndex / (POPULAR_TOPICS.length - 1)) * 66}%`,
-                      width: '33%',
-                    }}
-                  />
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => setPopularCarouselIndex((prev) => Math.min(POPULAR_TOPICS.length - 1, prev + 1))}
-                  className="p-1 hover:text-neutral-900 cursor-pointer"
-                  aria-label="Next topic"
-                >
-                  <ChevronRight className="w-4 h-4 stroke-[1.5]" />
-                </button>
-              </div>
-            </div>
-
-          </div>
-        </section>
-
-        {/* Still Looking For Help? Card Section (Matching Screenshot) */}
-        <section className="w-full bg-[#fafafa] py-12 sm:py-16 border-t border-neutral-200/60">
-          <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-16">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-              <h2 className="text-[24px] sm:text-[32px] font-normal tracking-tight text-neutral-900 font-serif text-center md:text-left">
-                Still looking for help?
-              </h2>
-              <Link
-                href="/contact"
-                className="w-full md:w-auto px-10 py-3.5 border border-neutral-900 text-[12px] uppercase tracking-[0.18em] font-medium text-neutral-900 text-center hover:bg-neutral-900 hover:text-white transition-colors duration-200"
+            {/* Mobile Carousel Indicators */}
+            <div className="flex items-center justify-between pt-4 max-w-[240px] mx-auto text-neutral-400">
+              <button
+                type="button"
+                onClick={() => setPopularCarouselIndex((prev) => Math.max(0, prev - 1))}
+                className="p-1 hover:text-neutral-900 cursor-pointer"
+                aria-label="Previous topic"
               >
-                GET IN TOUCH
-              </Link>
+                <ChevronLeft className="w-4 h-4 stroke-[1.5]" />
+              </button>
+              <div className="flex-1 mx-4 h-[1px] bg-neutral-300 relative overflow-hidden">
+                <div 
+                  className="absolute top-0 bottom-0 bg-neutral-900 transition-all duration-300"
+                  style={{
+                    left: `${(popularCarouselIndex / (POPULAR_TOPICS.length - 1)) * 66}%`,
+                    width: '33%',
+                  }}
+                />
+              </div>
+              <button
+                type="button"
+                onClick={() => setPopularCarouselIndex((prev) => Math.min(POPULAR_TOPICS.length - 1, prev + 1))}
+                className="p-1 hover:text-neutral-900 cursor-pointer"
+                aria-label="Next topic"
+              >
+                <ChevronRight className="w-4 h-4 stroke-[1.5]" />
+              </button>
             </div>
           </div>
         </section>
 
-        {/* Related Services 2-Card Banners (Matching Screenshot) */}
-        <section className="w-full bg-[#fafafa] pt-8 pb-16 sm:pb-24 border-t border-neutral-200/60">
-          <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-16">
-            <h2 className="text-[22px] sm:text-[28px] font-normal tracking-tight text-neutral-900 font-serif mb-8 sm:mb-12">
-              Related Services
+        {/* Still Looking For Help? Card Section */}
+        <section className="w-full px-6 sm:px-10 lg:px-14 xl:px-16 py-14 sm:py-20 border-t border-neutral-200">
+          <div className="w-full flex flex-col md:flex-row items-center justify-between gap-6">
+            <h2 className="text-[22px] sm:text-[26px] font-normal text-neutral-900">
+              Still looking for help?
             </h2>
+            <Link
+              href="/contact"
+              className="w-full md:w-auto px-16 py-3 border border-neutral-900 text-[11px] uppercase tracking-[0.16em] font-medium text-neutral-900 text-center hover:bg-neutral-900 hover:text-white transition-colors duration-200"
+            >
+              GET IN TOUCH
+            </Link>
+          </div>
+        </section>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-              
-              {/* Card 1: Shopping & Product Advice */}
-              <Link
-                href="/contact"
-                className="group relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden bg-neutral-900 flex items-center justify-center text-center p-6 text-white"
-              >
-                <Image
-                  src="/images/client-service/shopping-advice.jpg"
-                  alt="Shopping and Product Advice Moncler jacket"
-                  fill
-                  className="object-cover opacity-80 transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/25 group-hover:bg-black/35 transition-colors" />
-                <div className="relative z-10 flex flex-col items-center">
-                  <h3 className="text-[20px] sm:text-[24px] font-serif font-normal text-white mb-2">
-                    Shopping & Product Advice
-                  </h3>
-                  <span className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.16em] font-medium text-white/90 group-hover:text-white transition-colors">
-                    EXPLORE THIS SERVICE
-                    <ChevronRight className="w-3.5 h-3.5 stroke-[2] transition-transform duration-200 group-hover:translate-x-0.5" />
-                  </span>
-                </div>
-              </Link>
+        {/* Related Services 2-Card Section with .2em gap */}
+        <section className="w-full px-6 sm:px-10 lg:px-14 xl:px-16 pt-6 pb-16 sm:pb-24 border-t border-neutral-200">
+          <h2 className="text-[17px] sm:text-[18px] font-normal text-neutral-900 mb-6">
+            Related Services
+          </h2>
 
-              {/* Card 2: Order Management */}
-              <Link
-                href="/client-service#order-management"
-                className="group relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden bg-neutral-900 flex items-center justify-center text-center p-6 text-white"
-              >
-                <Image
-                  src="/images/client-service/order-management.jpg"
-                  alt="Order Management Moncler package ribbon"
-                  fill
-                  className="object-cover opacity-80 transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/25 group-hover:bg-black/35 transition-colors" />
-                <div className="relative z-10 flex flex-col items-center">
-                  <h3 className="text-[20px] sm:text-[24px] font-serif font-normal text-white mb-2">
-                    Order Management
-                  </h3>
-                  <span className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.16em] font-medium text-white/90 group-hover:text-white transition-colors">
-                    MANAGE ORDERS
-                    <ChevronRight className="w-3.5 h-3.5 stroke-[2] transition-transform duration-200 group-hover:translate-x-0.5" />
-                  </span>
-                </div>
-              </Link>
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-y-4 lg:gap-[0.2em]">
+            
+            {/* Card 1: Shopping & Product Advice */}
+            <Link
+              href="/contact"
+              className="group relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden bg-neutral-900 flex items-end justify-center text-center pb-8 p-6 text-white"
+            >
+              <Image
+                src="/images/client-service/shopping-advice.jpg"
+                alt="Shopping & Product Advice"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors" />
+              <div className="relative z-10 flex flex-col items-center">
+                <h3 className="text-[18px] sm:text-[20px] font-normal text-white mb-1.5">
+                  Shopping & Product Advice
+                </h3>
+                <span className="inline-flex items-center gap-1 text-[10.5px] uppercase tracking-[0.16em] font-medium text-white/95 group-hover:text-white transition-colors">
+                  EXPLORE THIS SERVICE
+                  <ChevronRight className="w-3 h-3 stroke-[2]" />
+                </span>
+              </div>
+            </Link>
 
-            </div>
+            {/* Card 2: Order Management */}
+            <Link
+              href="/client-service"
+              className="group relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden bg-neutral-900 flex items-end justify-center text-center pb-8 p-6 text-white"
+            >
+              <Image
+                src="/images/client-service/order-management.jpg"
+                alt="Order Management"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors" />
+              <div className="relative z-10 flex flex-col items-center">
+                <h3 className="text-[18px] sm:text-[20px] font-normal text-white mb-1.5">
+                  Order Management
+                </h3>
+                <span className="inline-flex items-center gap-1 text-[10.5px] uppercase tracking-[0.16em] font-medium text-white/95 group-hover:text-white transition-colors">
+                  MANAGE ORDERS
+                  <ChevronRight className="w-3 h-3 stroke-[2]" />
+                </span>
+              </div>
+            </Link>
+
           </div>
         </section>
       </main>

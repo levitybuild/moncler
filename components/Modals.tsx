@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import { X, Search, Check, ShoppingBag, Send } from 'lucide-react';
+import { X, Search, Check, ShoppingBag, Send, Trash2, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface ModalsProps {
   // Search
@@ -159,28 +160,46 @@ export function Modals({
         </div>
       )}
 
-      {/* 2. CART / SHOPPING BAG DRAWER */}
+      {/* 2. CART / SHOPPING BAG DRAWER (MATCHING SCREENSHOT) */}
       {isCartOpen && (
         <div className="fixed inset-0 z-50 overflow-hidden">
-          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={onCloseCart} />
-          <div className="fixed inset-y-0 right-0 max-w-md w-full bg-white shadow-2xl z-50 flex flex-col">
-            <div className="p-6 border-b border-neutral-200 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <ShoppingBag className="w-4 h-4 stroke-[1.5]" />
-                <h3 className="text-xs uppercase tracking-widest font-semibold">
-                  Shopping Bag ({cartItems.reduce((sum, item) => sum + item.quantity, 0)})
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-md transition-opacity" onClick={onCloseCart} />
+          <div className="fixed inset-y-0 right-0 max-w-[480px] w-full bg-white shadow-2xl z-50 flex flex-col animate-in slide-in-from-right duration-300">
+            {/* Header matching Screenshot */}
+            <div className="p-6 md:p-8 border-b border-neutral-200/80">
+              <div className="flex items-start justify-between">
+                <h3 className="text-[18px] sm:text-[19px] font-normal text-neutral-900 tracking-tight">
+                  Summary ({cartItems.reduce((sum, item) => sum + item.quantity, 0)})
                 </h3>
+                <button
+                  type="button"
+                  onClick={onCloseCart}
+                  className="p-1 -mr-1 text-neutral-500 hover:text-black cursor-pointer transition-colors"
+                  aria-label="Close cart"
+                >
+                  <X className="w-5 h-5 stroke-[1.3]" />
+                </button>
               </div>
+
+              <p className="text-[12px] text-neutral-600 font-light leading-relaxed mt-2.5 mb-3">
+                Log in or create an account to enjoy a personalized shopping experience and speed up future purchases.
+              </p>
+
               <button
                 type="button"
-                onClick={onCloseCart}
-                className="p-1.5 text-neutral-500 hover:text-black cursor-pointer"
+                onClick={() => {
+                  onCloseCart();
+                  onCloseSignup();
+                }}
+                className="inline-flex items-center gap-1 text-[11px] font-medium tracking-[0.14em] uppercase text-neutral-900 hover:text-black cursor-pointer"
               >
-                <X className="w-5 h-5 stroke-[1.5]" />
+                <span>LOG IN OR REGISTER</span>
+                <ChevronRight className="w-3.5 h-3.5 stroke-[1.5]" />
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-6 space-y-6">
+            {/* Cart Item List */}
+            <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6">
               {cartItems.length === 0 ? (
                 <div className="text-center py-16">
                   <p className="text-sm font-light text-neutral-500 mb-4">
@@ -189,51 +208,51 @@ export function Modals({
                   <button
                     type="button"
                     onClick={onCloseCart}
-                    className="px-6 py-3 bg-black text-white text-xs uppercase tracking-widest hover:bg-neutral-800"
+                    className="px-6 py-3 bg-black text-white text-xs uppercase tracking-widest hover:bg-neutral-800 cursor-pointer"
                   >
                     Discover Essentials
                   </button>
                 </div>
               ) : (
                 cartItems.map((item) => (
-                  <div key={`${item.id}-${item.size}`} className="flex gap-4 pb-6 border-b border-neutral-100">
-                    <div className="relative w-20 h-24 bg-neutral-100 overflow-hidden shrink-0">
+                  <div key={`${item.id}-${item.size}`} className="flex items-start gap-4 pb-6 border-b border-neutral-100 last:border-b-0">
+                    {/* Cutout Image */}
+                    <div className="relative w-16 h-20 bg-[#f6f5f3] overflow-hidden shrink-0 flex items-center justify-center">
                       <Image
                         src={item.image}
                         alt={item.name}
                         fill
-                        className="object-cover"
+                        className="object-contain p-1"
                         referrerPolicy="no-referrer"
                       />
                     </div>
-                    <div className="flex-1 text-xs">
-                      <h4 className="font-light text-neutral-900 leading-snug">{item.name}</h4>
-                      <p className="text-neutral-500 mt-1">Size: {item.size}</p>
-                      <p className="font-medium text-neutral-900 mt-1">{item.price}</p>
-                      <div className="flex items-center gap-3 mt-3">
-                        <div className="flex items-center border border-neutral-200">
-                          <button
-                            type="button"
-                            onClick={() => onUpdateCartQuantity(item.id, -1)}
-                            className="px-2 py-0.5 hover:bg-neutral-100"
-                          >
-                            -
-                          </button>
-                          <span className="px-2 text-xs">{item.quantity}</span>
-                          <button
-                            type="button"
-                            onClick={() => onUpdateCartQuantity(item.id, 1)}
-                            className="px-2 py-0.5 hover:bg-neutral-100"
-                          >
-                            +
-                          </button>
-                        </div>
+
+                    {/* Content */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between gap-3">
+                        <h4 className="text-[13px] font-normal text-neutral-900 leading-snug">
+                          {item.name}
+                        </h4>
+                        <span className="text-[13px] font-normal text-neutral-900 shrink-0">
+                          {item.price}
+                        </span>
+                      </div>
+
+                      <div className="mt-1 space-y-0.5 text-[11.5px] text-neutral-500 font-light">
+                        <p>Colour: Beige</p>
+                        <p>Size: {item.size}</p>
+                        <p>Quantity: {item.quantity}</p>
+                      </div>
+
+                      {/* Remove Trash Button */}
+                      <div className="flex justify-end pt-1">
                         <button
                           type="button"
                           onClick={() => onRemoveCartItem(item.id)}
-                          className="text-[11px] text-neutral-400 hover:text-black underline"
+                          className="text-neutral-400 hover:text-neutral-900 p-1 cursor-pointer transition-colors"
+                          aria-label="Remove item"
                         >
-                          Remove
+                          <Trash2 className="w-4 h-4 stroke-[1.2]" />
                         </button>
                       </div>
                     </div>
@@ -242,23 +261,45 @@ export function Modals({
               )}
             </div>
 
+            {/* Bottom Checkout Section */}
             {cartItems.length > 0 && (
-              <div className="p-6 border-t border-neutral-200 bg-neutral-50 space-y-4">
-                <div className="flex justify-between text-xs">
-                  <span className="text-neutral-500">Complimentary Shipping</span>
-                  <span className="font-medium text-neutral-900">Free</span>
-                </div>
-                <div className="flex justify-between text-sm font-medium pt-2 border-t border-neutral-200">
+              <div className="p-6 md:p-8 border-t border-neutral-200/80 bg-white space-y-3.5">
+                <div className="flex items-center justify-between text-[14.5px] font-normal text-neutral-900">
                   <span>Subtotal</span>
                   <span>£{calculateSubtotal().toLocaleString('en-GB', { minimumFractionDigits: 2 })}</span>
                 </div>
+
+                {/* Solid Black CHECKOUT button */}
                 <button
                   type="button"
                   onClick={() => alert('Proceeding to Moncler Secure Checkout.')}
-                  className="w-full py-4 bg-black text-white text-xs uppercase tracking-widest font-semibold hover:bg-neutral-800 transition-colors"
+                  className="w-full py-3.5 bg-black text-white text-[11px] uppercase tracking-[0.16em] font-medium hover:bg-neutral-800 transition-colors cursor-pointer"
                 >
-                  Proceed to Checkout
+                  CHECKOUT
                 </button>
+
+                {/* PayPal button matching screenshot */}
+                <button
+                  type="button"
+                  onClick={() => alert('Proceeding with PayPal Checkout.')}
+                  className="w-full py-2.5 bg-white border border-neutral-300 hover:border-neutral-400 flex items-center justify-center cursor-pointer transition-colors shadow-none"
+                >
+                  <span className="font-sans italic font-extrabold text-[17px] tracking-tight select-none">
+                    <span className="text-[#003087]">Pay</span><span className="text-[#0079C1]">Pal</span>
+                  </span>
+                </button>
+
+                {/* VIEW BAG > */}
+                <div className="pt-1 text-center">
+                  <Link
+                    href="/cart"
+                    onClick={onCloseCart}
+                    className="inline-flex items-center justify-center gap-1 text-[11px] tracking-[0.14em] uppercase font-medium text-neutral-900 hover:text-black cursor-pointer"
+                  >
+                    <span>VIEW BAG</span>
+                    <ChevronRight className="w-3.5 h-3.5 stroke-[1.5]" />
+                  </Link>
+                </div>
               </div>
             )}
           </div>

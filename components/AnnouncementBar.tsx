@@ -42,7 +42,7 @@ export function AnnouncementBar({
           : 'bg-black text-white border-neutral-900'
       }`}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-center relative">
+      <div className="w-full px-2 sm:px-4 lg:px-8 flex items-center justify-center relative">
         <p className="text-center font-normal pr-6 pl-2">
           <span>Enter a world of extraordinary, join </span>
           <button

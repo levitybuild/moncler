@@ -432,7 +432,7 @@ export function Navbar({
         className={`z-40 w-full transition-all duration-300 shadow-none ${
           isHeroOverlayPage
             ? isAtTop
-              ? `absolute top-0 sm:top-8 left-0 right-0 border-none ${
+              ? `relative z-40 -mb-[72px] lg:-mb-[80px] border-none ${
                   isWhiteMode ? 'bg-[#f9f9f8] text-black' : 'bg-transparent text-white'
                 }`
               : `fixed top-0 left-0 right-0 bg-[#f9f9f8] text-black border-none ${

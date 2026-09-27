@@ -37,7 +37,7 @@ export function Footer({
 
   return (
     <footer id="site-footer" data-site-footer className="w-full bg-black text-white pt-16 sm:pt-20 lg:pt-24 pb-12 sm:pb-16 lg:pb-20 px-6 sm:px-10 lg:px-16">
-      <div className="w-full max-w-[1520px] mx-auto">
+      <div className="w-full">
         {/* Desktop Footer Grid: Exactly matching image.png */}
         <div className="hidden lg:grid lg:grid-cols-5 gap-10 xl:gap-14 items-start">
           {/* Column 1: Keep in touch */}

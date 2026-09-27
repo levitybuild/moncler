@@ -107,7 +107,7 @@ export default function TermsOfServicePage() {
       />
 
       <main className="w-full bg-[#fbfbfb]">
-        <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-16 pt-8 sm:pt-14 pb-16 sm:pb-24">
+        <div className="w-full px-6 sm:px-10 lg:px-14 xl:px-16 pt-8 sm:pt-14 pb-16 sm:pb-24">
           
           {/* Header section: LEGAL & Title */}
           <div className="mb-8 sm:mb-12">
@@ -169,7 +169,7 @@ export default function TermsOfServicePage() {
             </aside>
 
             {/* Main Terms Body (Col 2) */}
-            <div className="lg:col-span-9 max-w-[840px] text-[13.5px] sm:text-[14.5px] leading-[1.8] text-neutral-800 font-light space-y-6">
+            <div className="lg:col-span-9 w-full text-[13.5px] sm:text-[14.5px] leading-[1.8] text-neutral-800 font-light space-y-6">
               
               {/* Introduction paragraphs */}
               <p className="leading-[1.85]">

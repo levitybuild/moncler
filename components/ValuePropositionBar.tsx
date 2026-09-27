@@ -33,8 +33,8 @@ export function ValuePropositionBar({
   }, [isPlaying, items.length]);
 
   return (
-    <div className="w-full bg-[#f7f7f6] border-y border-neutral-200/60 py-4 px-4 sm:px-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="w-full bg-[#f7f7f6] border-y border-neutral-200/60 py-4 px-6 md:px-12 lg:px-16 xl:px-20">
+      <div className="w-full">
         {/* Desktop View: Three evenly distributed value propositions */}
         <div className="hidden md:flex items-center justify-around text-xs sm:text-[13px] tracking-normal font-light text-neutral-800">
           {items.map((item) => (

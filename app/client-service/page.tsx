@@ -9,12 +9,6 @@ import {
   Phone, 
   MessageSquare, 
   Mail, 
-  User,
-  ArrowRight,
-  Sparkles,
-  MapPin,
-  Calendar,
-  CheckCircle2
 } from 'lucide-react';
 import { AnnouncementBar } from '@/components/AnnouncementBar';
 import { Navbar } from '@/components/Navbar';
@@ -48,6 +42,9 @@ export default function ClientServicePage() {
   // Country selector state
   const [selectedCountry, setSelectedCountry] = useState('UNITED KINGDOM');
   const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
+
+  // Search input state
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Shopping cart items state
   const [cartItems, setCartItems] = useState<CartItem[]>([
@@ -167,39 +164,39 @@ export default function ClientServicePage() {
         onOpenSignup={() => setIsSignupOpen(true)}
       />
 
-      {/* 2. Main Page Content - NO MAX WIDTH, ONLY PADDING */}
-      <main className="w-full pt-6 md:pt-10 pb-20">
+      {/* 2. Main Page Content - NO MAX WIDTH, FULL WIDTH WITH PADDING */}
+      <main className="w-full pt-4 md:pt-6 pb-16">
         {/* Breadcrumbs */}
-        <div className="w-full px-5 md:px-12 lg:px-20 xl:px-28 pb-4">
-          <nav className="flex items-center space-x-2 text-[11px] md:text-xs tracking-[0.18em] uppercase text-neutral-500">
+        <div className="w-full px-6 md:px-10 lg:px-14 xl:px-16 pt-2 pb-1">
+          <nav className="flex items-center space-x-1.5 text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-neutral-600 font-light">
             <Link href="/" className="hover:text-black transition-colors">
               HOME
             </Link>
-            <ChevronRight className="w-3.5 h-3.5 text-neutral-400 stroke-[1.5]" />
-            <span className="text-black font-medium">CLIENT SERVICE</span>
+            <ChevronRight className="w-3 h-3 text-neutral-400 stroke-[1.5]" />
+            <span className="text-black font-normal">CLIENT SERVICE</span>
           </nav>
         </div>
 
         {/* Page Title */}
-        <div className="w-full px-5 md:px-12 lg:px-20 xl:px-28 pt-2 pb-8 md:pb-12 border-b border-neutral-100">
-          <h1 className="text-3xl md:text-5xl font-light tracking-tight text-neutral-900">
+        <div className="w-full px-6 md:px-10 lg:px-14 xl:px-16 pt-2 pb-4">
+          <h1 className="text-3xl md:text-4xl lg:text-[42px] font-light tracking-tight text-neutral-900">
             Client Service
           </h1>
         </div>
 
         {/* Contact Info & Channel Bar */}
-        <div className="w-full px-5 md:px-12 lg:px-20 xl:px-28 py-6 md:py-8 border-b border-neutral-200">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div className="w-full px-6 md:px-10 lg:px-14 xl:px-16 py-3.5 mb-2">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             {/* Country Selector */}
-            <div className="relative">
-              <span className="text-xs md:text-sm text-neutral-500 mr-2">Contact details for</span>
+            <div className="relative inline-flex items-center text-xs md:text-[13px] text-neutral-600 font-light">
+              <span className="mr-1.5">Contact details for</span>
               <button
                 type="button"
                 onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
-                className="inline-flex items-center text-xs md:text-sm font-semibold tracking-wider text-black hover:opacity-75 transition-opacity"
+                className="inline-flex items-center font-semibold text-neutral-900 tracking-wider hover:opacity-75 transition-opacity cursor-pointer"
               >
                 <span>{selectedCountry}</span>
-                <ChevronDown className={`w-4 h-4 ml-1 transition-transform ${isCountryDropdownOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`w-3.5 h-3.5 ml-1 transition-transform ${isCountryDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
 
               {isCountryDropdownOpen && (
@@ -223,11 +220,11 @@ export default function ClientServicePage() {
               )}
             </div>
 
-            {/* Direct Contact Links - Single line on mobile with smooth natural horizontal scroll */}
-            <div className="flex flex-nowrap items-center overflow-x-auto scrollbar-none whitespace-nowrap gap-6 md:gap-8 text-[11px] md:text-xs font-semibold tracking-[0.18em] uppercase text-neutral-900 -mx-5 px-5 md:mx-0 md:px-0 py-1">
+            {/* Direct Contact Links */}
+            <div className="flex flex-wrap items-center gap-5 sm:gap-7 xl:gap-9 text-[11px] font-semibold tracking-[0.16em] uppercase text-neutral-900">
               <a 
                 href="tel:0080010204000" 
-                className="inline-flex items-center gap-2 hover:opacity-70 transition-opacity shrink-0"
+                className="inline-flex items-center gap-1.5 hover:opacity-70 transition-opacity shrink-0"
               >
                 <Phone className="w-3.5 h-3.5 stroke-[1.8]" />
                 <span>00 800 10204000</span>
@@ -236,7 +233,7 @@ export default function ClientServicePage() {
               <button 
                 type="button"
                 onClick={() => setIsChatOpen(true)}
-                className="inline-flex items-center gap-2 hover:opacity-70 transition-opacity uppercase shrink-0"
+                className="inline-flex items-center gap-1.5 hover:opacity-70 transition-opacity uppercase shrink-0 cursor-pointer"
               >
                 <MessageSquare className="w-3.5 h-3.5 stroke-[1.8]" />
                 <span>WHATSAPP</span>
@@ -244,7 +241,7 @@ export default function ClientServicePage() {
 
               <Link 
                 href="/contact" 
-                className="inline-flex items-center gap-2 hover:opacity-70 transition-opacity shrink-0"
+                className="inline-flex items-center gap-1.5 hover:opacity-70 transition-opacity shrink-0"
               >
                 <Mail className="w-3.5 h-3.5 stroke-[1.8]" />
                 <span>EMAIL</span>
@@ -252,101 +249,145 @@ export default function ClientServicePage() {
 
               <Link 
                 href="/contact" 
-                className="hover:underline underline-offset-4 shrink-0"
+                className="inline-flex items-center gap-1 hover:opacity-70 transition-opacity shrink-0"
               >
-                CONTACT US
+                <span>CONTACT US</span>
+                <ChevronRight className="w-3.5 h-3.5 stroke-[2]" />
               </Link>
             </div>
           </div>
         </div>
 
-        {/* 3. Editorial Service Cards Section - Full Width with Horizontal Padding */}
-        <div className="w-full px-5 md:px-12 lg:px-20 xl:px-28 pt-10 md:pt-14 space-y-16 md:space-y-24">
-          {serviceCards.map((card, index) => (
-            <section 
-              key={card.id}
-              className="w-full border-b border-neutral-100 pb-16 md:pb-24 last:border-b-0"
-            >
-              {/* Full width image container */}
-              <div className="w-full relative aspect-[16/9] md:aspect-[21/9] lg:aspect-[2.4/1] bg-neutral-100 overflow-hidden mb-8 md:mb-10">
-                <Image
-                  src={card.imageSrc}
-                  alt={card.imageAlt}
-                  fill
-                  sizes="100vw"
-                  className="object-cover transition-transform duration-700 hover:scale-105"
-                  priority={index < 2}
-                />
-              </div>
+        {/* 3. "How Can We Help?" Search Section */}
+        <section className="w-full bg-[#f8f8f7] px-6 md:px-10 lg:px-14 xl:px-16 py-10 lg:py-14 my-3">
+          <h2 className="text-[17px] md:text-[19px] font-normal tracking-normal text-neutral-900 mb-6">
+            How Can We Help?
+          </h2>
+          <div className="w-full border-b border-neutral-300 pb-3 flex items-center">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search FAQs"
+              className="w-full bg-transparent text-2xl md:text-3xl lg:text-[32px] text-neutral-900 placeholder:text-neutral-500 font-light focus:outline-none tracking-tight"
+            />
+          </div>
+        </section>
 
-              {/* Text Information block */}
-              <div className="w-full max-w-none space-y-3 md:space-y-4">
-                <h2 className="text-xl md:text-2xl lg:text-3xl font-normal tracking-tight text-neutral-900">
+        {/* 4. Exclusive Services Header & 3-Column Desktop Grid */}
+        <section className="w-full px-6 md:px-10 lg:px-14 xl:px-16 pt-10 lg:pt-14 pb-14">
+          {/* Header Row */}
+          <div className="w-full flex items-center justify-between pb-7">
+            <h2 className="text-[17px] md:text-[19px] font-normal tracking-normal text-neutral-900">
+              Exclusive Services
+            </h2>
+            <div className="hidden lg:flex items-center space-x-7 xl:space-x-8 text-[11px] xl:text-[12px] font-semibold tracking-[0.16em] uppercase text-neutral-900">
+              <button type="button" onClick={() => {}} className="hover:opacity-70 transition-opacity cursor-pointer">
+                SIZE GUIDE
+              </button>
+              <button type="button" onClick={() => {}} className="hover:opacity-70 transition-opacity cursor-pointer">
+                SHOP WITH US
+              </button>
+              <button type="button" onClick={() => {}} className="hover:opacity-70 transition-opacity cursor-pointer">
+                EXCHANGES
+              </button>
+              <button type="button" onClick={() => {}} className="hover:opacity-70 transition-opacity cursor-pointer">
+                APPOINTMENTS
+              </button>
+            </div>
+          </div>
+
+          {/* 3-Column Cards Grid on Desktop */}
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6 lg:gap-[0.2em]">
+            {serviceCards.map((card, index) => (
+              <div key={card.id} className="w-full flex flex-col pb-6 lg:pb-8">
+                {/* Landscape card image */}
+                <div className="w-full relative aspect-[16/10] bg-neutral-100 overflow-hidden mb-4">
+                  <Image
+                    src={card.imageSrc}
+                    alt={card.imageAlt}
+                    fill
+                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                    className="object-cover"
+                    priority={index < 3}
+                  />
+                </div>
+
+                {/* Card Title */}
+                <h3 className="text-base lg:text-[17px] font-medium text-neutral-900 mb-1.5 tracking-tight">
                   {card.title}
-                </h2>
-                <p className="text-sm md:text-base text-neutral-600 font-light leading-relaxed max-w-4xl">
+                </h3>
+
+                {/* Card Description */}
+                <p className="text-xs lg:text-[13px] text-neutral-600 font-light leading-relaxed mb-4 min-h-[38px]">
                   {card.description}
                 </p>
-                <div className="pt-2">
+
+                {/* Card Link CTA */}
+                <div className="mt-auto">
                   <Link
                     href={card.ctaHref}
-                    className="inline-flex items-center gap-2 text-xs md:text-sm font-semibold tracking-[0.2em] uppercase text-black hover:opacity-70 transition-opacity group"
+                    className="inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.18em] uppercase text-black hover:opacity-70 transition-opacity group"
                   >
                     <span>{card.ctaText}</span>
-                    <ChevronRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                    <ChevronRight className="w-3.5 h-3.5 stroke-[2] transition-transform group-hover:translate-x-0.5" />
                   </Link>
                 </div>
               </div>
-            </section>
-          ))}
+            ))}
+          </div>
+        </section>
 
-          {/* 4. Over 300 Boutiques Hero Block */}
-          <section className="w-full pt-4 pb-12">
-            <div className="w-full relative aspect-[16/10] md:aspect-[21/9] lg:aspect-[2.5/1] bg-neutral-100 overflow-hidden mb-8 md:mb-10">
-              <Image
-                src="/images/client-service/boutiques-300.jpg"
-                alt="Moncler luxury boutique interior architectural staircase"
-                fill
-                sizes="100vw"
-                className="object-cover transition-transform duration-700 hover:scale-105"
-              />
-            </div>
+        {/* 5. "Over 300 Boutiques" Wide Feature Block */}
+        <section className="w-full px-6 md:px-10 lg:px-14 xl:px-16 pt-2 pb-16">
+          {/* Wide Feature Image */}
+          <div className="w-full relative aspect-[16/9] md:aspect-[21/9] lg:aspect-[2.35/1] bg-neutral-100 overflow-hidden mb-6">
+            <Image
+              src="/images/client-service/moncler_300_boutiques_1790438016640.jpg"
+              alt="Moncler luxury boutique interior architectural staircase"
+              fill
+              sizes="100vw"
+              className="object-cover"
+            />
+          </div>
 
-            <div className="w-full space-y-3 md:space-y-4">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal tracking-tight text-neutral-900">
-                Over 300 Boutiques
-              </h2>
-              <p className="text-sm md:text-base text-neutral-600 font-light leading-relaxed">
+          {/* Text & CTAs Row */}
+          <div className="w-full flex flex-col lg:flex-row lg:items-center justify-between gap-4 pt-2">
+            <h2 className="text-2xl md:text-3xl lg:text-[34px] font-light tracking-tight text-neutral-900">
+              Over 300 Boutiques
+            </h2>
+
+            <div className="flex flex-col items-start lg:items-end gap-2">
+              <span className="text-xs md:text-[13px] text-neutral-600 font-light">
                 Explore the world of Moncler
-              </p>
-              
-              <div className="flex flex-wrap items-center gap-6 md:gap-10 pt-2">
+              </span>
+              <div className="flex flex-wrap items-center gap-6 xl:gap-8 text-[11px] xl:text-xs font-semibold tracking-[0.18em] uppercase text-neutral-900">
                 <button
                   type="button"
                   onClick={() => setIsChatOpen(true)}
-                  className="inline-flex items-center gap-2 text-xs md:text-sm font-semibold tracking-[0.2em] uppercase text-black hover:opacity-70 transition-opacity group"
+                  className="inline-flex items-center gap-1.5 hover:opacity-70 transition-opacity cursor-pointer group"
                 >
                   <span>BOOK YOUR APPOINTMENT</span>
-                  <ChevronRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                  <ChevronRight className="w-3.5 h-3.5 stroke-[2] transition-transform group-hover:translate-x-0.5" />
                 </button>
 
                 <Link
                   href="/boutiques"
-                  className="inline-flex items-center gap-2 text-xs md:text-sm font-semibold tracking-[0.2em] uppercase text-black hover:opacity-70 transition-opacity group"
+                  className="inline-flex items-center gap-1.5 hover:opacity-70 transition-opacity group"
                 >
                   <span>FIND A BOUTIQUE</span>
-                  <ChevronRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                  <ChevronRight className="w-3.5 h-3.5 stroke-[2] transition-transform group-hover:translate-x-0.5" />
                 </Link>
               </div>
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
       </main>
 
-      {/* 5. Value Proposition Bar */}
+      {/* 6. Value Proposition Bar */}
       <ValuePropositionBar />
 
-      {/* 6. Standard Footer */}
+      {/* 7. Standard Moncler Footer */}
       <Footer
         onOpenSignup={() => setIsSignupOpen(true)}
         onOpenCookieSettings={() => {}}
@@ -357,7 +398,7 @@ export default function ClientServicePage() {
         onToggleHighContrast={(enabled) => setIsHighContrast(enabled)}
       />
 
-      {/* 7. Modals & Drawers */}
+      {/* 8. Modals & Drawers */}
       <Modals
         isSearchOpen={isSearchOpen}
         onCloseSearch={() => setIsSearchOpen(false)}
@@ -379,7 +420,7 @@ export default function ClientServicePage() {
         onAddToCart={() => {}}
       />
 
-      {/* 8. Mobile Persistent Floating Bottom Navigation Bar */}
+      {/* 9. Mobile Persistent Floating Bottom Navigation Bar */}
       <MobileFloatingBar
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenAccount={() => setIsPeaksOpen(true)}

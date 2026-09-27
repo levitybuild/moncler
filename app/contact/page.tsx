@@ -436,13 +436,13 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* EMAIL US Form Section (matching Screenshot 2) */}
-        <div className="w-full px-5 md:px-12 lg:px-20 xl:px-28 py-12 md:py-20">
-          <div className="w-full">
-            <h2 className="text-xl md:text-2xl font-light tracking-[0.18em] uppercase text-neutral-900 mb-4">
+        {/* EMAIL US Form Section (matching Screenshot) */}
+        <div className="w-full px-5 md:px-12 lg:px-16 xl:px-20 py-12 md:py-16">
+          <div className="w-full lg:w-[66.6%]">
+            <h2 className="text-xl md:text-2xl font-normal tracking-[0.14em] uppercase text-neutral-900 mb-3">
               EMAIL US
             </h2>
-            <p className="text-sm md:text-base text-neutral-600 font-light leading-relaxed mb-10 max-w-3xl">
+            <p className="text-xs sm:text-[13px] md:text-sm text-neutral-700 font-light leading-relaxed mb-8">
               Our online Client Advisors will be happy to answer your questions. They will be delighted to provide more information, styling tips and assist you in placing your order.
             </p>
 
@@ -466,19 +466,19 @@ export default function ContactPage() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-8">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Row 1: Title & First Name */}
-                <div className="grid grid-cols-[100px_1fr] sm:grid-cols-[130px_1fr] gap-4 sm:gap-8 items-end">
+                <div className="grid grid-cols-[130px_1fr] sm:grid-cols-[160px_1fr] lg:grid-cols-[180px_1fr] gap-4 sm:gap-6 items-end">
                   {/* Title */}
-                  <div className="border-b border-neutral-300 focus-within:border-black transition-colors pb-1">
-                    <label className="block text-xs text-neutral-500 font-light mb-1">
+                  <div className="border-b border-neutral-300 focus-within:border-black transition-colors pb-1.5">
+                    <label className="block text-[11px] sm:text-xs text-neutral-500 font-light mb-1">
                       Title
                     </label>
                     <div className="relative">
                       <select
                         value={formData.title}
                         onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                        className="w-full bg-transparent text-sm text-neutral-900 focus:outline-none appearance-none cursor-pointer pr-5 py-0.5"
+                        className="w-full bg-transparent text-xs sm:text-sm text-neutral-900 focus:outline-none appearance-none cursor-pointer pr-6 py-0.5"
                       >
                         <option value="">Select</option>
                         <option value="Mr">Mr.</option>
@@ -491,53 +491,53 @@ export default function ContactPage() {
                   </div>
 
                   {/* First Name */}
-                  <div className="border-b border-neutral-300 focus-within:border-black transition-colors pb-1">
+                  <div className="border-b border-neutral-300 focus-within:border-black transition-colors pb-1.5">
                     <input
                       type="text"
                       required
                       value={formData.firstName}
                       onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                       placeholder="First Name*"
-                      className="w-full bg-transparent text-sm text-neutral-900 placeholder:text-neutral-500 focus:outline-none py-0.5"
+                      className="w-full bg-transparent text-xs sm:text-sm text-neutral-900 placeholder:text-neutral-500 focus:outline-none py-0.5"
                     />
                   </div>
                 </div>
 
                 {/* Row 2: Last Name */}
-                <div className="w-full border-b border-neutral-300 focus-within:border-black transition-colors pb-1">
+                <div className="w-full border-b border-neutral-300 focus-within:border-black transition-colors pb-1.5">
                   <input
                     type="text"
                     required
                     value={formData.lastName}
                     onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                     placeholder="Last Name*"
-                    className="w-full bg-transparent text-sm text-neutral-900 placeholder:text-neutral-500 focus:outline-none py-0.5"
+                    className="w-full bg-transparent text-xs sm:text-sm text-neutral-900 placeholder:text-neutral-500 focus:outline-none py-0.5"
                   />
                 </div>
 
                 {/* Row 3: Email Address */}
-                <div className="w-full border-b border-neutral-300 focus-within:border-black transition-colors pb-1">
+                <div className="w-full border-b border-neutral-300 focus-within:border-black transition-colors pb-1.5">
                   <input
                     type="email"
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="Email address*"
-                    className="w-full bg-transparent text-sm text-neutral-900 placeholder:text-neutral-500 focus:outline-none py-0.5"
+                    className="w-full bg-transparent text-xs sm:text-sm text-neutral-900 placeholder:text-neutral-500 focus:outline-none py-0.5"
                   />
                 </div>
 
                 {/* Row 4: Phone Number */}
                 <div className="w-full space-y-1">
-                  <label className="block text-xs text-neutral-500 font-light">
+                  <label className="block text-[11px] sm:text-xs text-neutral-500 font-light">
                     Phone number*
                   </label>
-                  <div className="grid grid-cols-[90px_1fr] sm:grid-cols-[110px_1fr] gap-4 sm:gap-8 items-end">
-                    <div className="relative border-b border-neutral-300 focus-within:border-black transition-colors pb-1">
+                  <div className="grid grid-cols-[120px_1fr] sm:grid-cols-[150px_1fr] lg:grid-cols-[170px_1fr] gap-4 sm:gap-6 items-end">
+                    <div className="relative border-b border-neutral-300 focus-within:border-black transition-colors pb-1.5">
                       <select
                         value={formData.phoneCode}
                         onChange={(e) => setFormData({ ...formData, phoneCode: e.target.value })}
-                        className="w-full bg-transparent text-sm text-neutral-900 focus:outline-none appearance-none cursor-pointer pr-5 py-0.5"
+                        className="w-full bg-transparent text-xs sm:text-sm text-neutral-900 focus:outline-none appearance-none cursor-pointer pr-6 py-0.5"
                       >
                         <option value="+44">+44</option>
                         <option value="+1">+1</option>
@@ -550,29 +550,29 @@ export default function ContactPage() {
                       <ChevronDown className="w-3.5 h-3.5 text-neutral-700 absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none" />
                     </div>
 
-                    <div className="border-b border-neutral-300 focus-within:border-black transition-colors pb-1">
+                    <div className="border-b border-neutral-300 focus-within:border-black transition-colors pb-1.5">
                       <input
                         type="tel"
                         required
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        placeholder="Phone number"
-                        className="w-full bg-transparent text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none py-0.5"
+                        placeholder=""
+                        className="w-full bg-transparent text-xs sm:text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none py-0.5"
                       />
                     </div>
                   </div>
                 </div>
 
                 {/* Row 5: Country/region */}
-                <div className="w-full border-b border-neutral-300 focus-within:border-black transition-colors pb-1">
-                  <label className="block text-xs text-neutral-500 font-light mb-1">
+                <div className="w-full border-b border-neutral-300 focus-within:border-black transition-colors pb-1.5">
+                  <label className="block text-[11px] sm:text-xs text-neutral-500 font-light mb-1">
                     Country/region*
                   </label>
                   <div className="relative">
                     <select
                       value={formData.country}
                       onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                      className="w-full bg-transparent text-sm text-neutral-900 focus:outline-none appearance-none cursor-pointer pr-6 py-0.5"
+                      className="w-full bg-transparent text-xs sm:text-sm text-neutral-900 focus:outline-none appearance-none cursor-pointer pr-6 py-0.5"
                     >
                       <option value="United Kingdom">United Kingdom</option>
                       <option value="United States">United States</option>
@@ -587,8 +587,8 @@ export default function ContactPage() {
                 </div>
 
                 {/* Row 6: Topic */}
-                <div className="w-full border-b border-neutral-300 focus-within:border-black transition-colors pb-1">
-                  <label className="block text-xs text-neutral-500 font-light mb-1">
+                <div className="w-full border-b border-neutral-300 focus-within:border-black transition-colors pb-1.5">
+                  <label className="block text-[11px] sm:text-xs text-neutral-500 font-light mb-1">
                     Topic*
                   </label>
                   <div className="relative">
@@ -596,7 +596,7 @@ export default function ContactPage() {
                       required
                       value={formData.topic}
                       onChange={(e) => setFormData({ ...formData, topic: e.target.value })}
-                      className="w-full bg-transparent text-sm text-neutral-900 focus:outline-none appearance-none cursor-pointer pr-6 py-0.5"
+                      className="w-full bg-transparent text-xs sm:text-sm text-neutral-900 focus:outline-none appearance-none cursor-pointer pr-6 py-0.5"
                     >
                       <option value="">Select</option>
                       <option value="orders">Orders & Delivery</option>
@@ -611,28 +611,28 @@ export default function ContactPage() {
                 </div>
 
                 {/* Row 7: Message */}
-                <div className="w-full border-b border-neutral-300 focus-within:border-black transition-colors pb-1">
+                <div className="w-full border-b border-neutral-300 focus-within:border-black transition-colors pb-1.5">
                   <textarea
                     required
-                    rows={3}
+                    rows={1}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="Message*"
-                    className="w-full bg-transparent text-sm text-neutral-900 placeholder:text-neutral-500 focus:outline-none resize-y py-0.5"
+                    className="w-full bg-transparent text-xs sm:text-sm text-neutral-900 placeholder:text-neutral-500 focus:outline-none resize-none py-0.5"
                   />
                 </div>
 
-                {/* Row 8: Add picture button (matching Screenshot 2) */}
-                <div className="w-full">
-                  <label className="w-full flex items-center justify-between p-3.5 bg-neutral-100 hover:bg-neutral-200/70 cursor-pointer transition-colors border border-transparent">
+                {/* Row 8: Add picture button (matching Screenshot) */}
+                <div className="w-full pt-1">
+                  <label className="w-full flex items-center justify-between px-4 py-3.5 bg-[#f5f4f2] hover:bg-[#edece8] cursor-pointer transition-colors border border-transparent">
                     <div className="flex items-center gap-3">
                       <Plus className="w-4 h-4 text-neutral-800 stroke-[1.5]" />
-                      <span className="text-xs md:text-sm font-normal text-neutral-900">
+                      <span className="text-xs sm:text-[13px] font-normal text-neutral-900">
                         Add picture
                       </span>
                     </div>
                     <div className="flex items-center text-neutral-400">
-                      <Info className="w-4 h-4" />
+                      <Info className="w-3.5 h-3.5" />
                     </div>
                     <input
                       type="file"
@@ -653,7 +653,7 @@ export default function ContactPage() {
                           <button
                             type="button"
                             onClick={() => removeFile(index)}
-                            className="text-neutral-500 hover:text-black ml-1"
+                            className="text-neutral-500 hover:text-black ml-1 cursor-pointer"
                           >
                             <X className="w-3.5 h-3.5" />
                           </button>
@@ -663,33 +663,33 @@ export default function ContactPage() {
                   )}
                 </div>
 
-                {/* Row 9: Terms and Conditions Checkbox (matching Screenshot 2) */}
-                <div className="flex items-start gap-3 pt-1">
+                {/* Row 9: Terms and Conditions Checkbox (matching Screenshot) */}
+                <div className="flex items-start gap-3 pt-2">
                   <input
                     type="checkbox"
                     id="terms"
                     required
                     checked={formData.acceptedTerms}
                     onChange={(e) => setFormData({ ...formData, acceptedTerms: e.target.checked })}
-                    className="mt-1 w-4 h-4 rounded-none border-neutral-400 text-black focus:ring-0 focus:ring-offset-0 cursor-pointer accent-black"
+                    className="mt-0.5 w-4 h-4 rounded-none border-neutral-400 text-black focus:ring-0 focus:ring-offset-0 cursor-pointer accent-black"
                   />
-                  <label htmlFor="terms" className="text-xs md:text-sm text-neutral-700 leading-relaxed cursor-pointer font-light">
+                  <label htmlFor="terms" className="text-xs sm:text-[13px] text-neutral-800 leading-relaxed cursor-pointer font-light">
                     I confirm that I accept the{' '}
-                    <Link href="/legal" className="underline hover:text-black font-normal">
+                    <Link href="/tos" className="underline underline-offset-2 hover:text-black font-normal">
                       Conditions of Use
                     </Link>{' '}
                     and have read and understood the{' '}
-                    <Link href="/privacy" className="underline hover:text-black font-normal">
+                    <Link href="/tos" className="underline underline-offset-2 hover:text-black font-normal">
                       Privacy and Cookie Policy.*
                     </Link>
                   </label>
                 </div>
 
                 {/* Submit button */}
-                <div className="pt-2">
+                <div className="pt-4">
                   <button
                     type="submit"
-                    className="w-full py-4 bg-black text-white text-xs md:text-sm font-semibold tracking-[0.25em] uppercase hover:bg-neutral-800 transition-colors cursor-pointer"
+                    className="w-full py-3.5 sm:py-4 bg-black text-white text-xs font-semibold tracking-[0.25em] uppercase hover:bg-neutral-800 transition-colors cursor-pointer"
                   >
                     SUBMIT
                   </button>
