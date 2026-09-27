@@ -573,7 +573,7 @@ export function Footer({
         <div className="mt-20 sm:mt-28 lg:mt-32">
           {/* Giant Moncler Brand Wordmark */}
           <div className="select-none mb-10 sm:mb-12 flex items-center">
-            <MonclerLogo size="footer" isNegative />
+            <MonclerLogo size="footer" />
           </div>
 
           {/* Region / Country Selector with Flag & Legal Links */}

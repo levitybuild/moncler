@@ -474,7 +474,7 @@ export function MobileMenuBottomDrawer({
                   <div>
                     {/* Centered Brand Title */}
                     <div className="flex justify-center mb-8">
-                      <MonclerLogo size="md" />
+                      <MonclerLogo size="md" isNegative={true} />
                     </div>
 
                     {/* Primary Category Links with clean Right Chevrons */}

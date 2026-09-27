@@ -477,7 +477,7 @@ export function Navbar({
             {/* Brand Logo: Moncler (Centered on mobile and desktop) */}
             <div className="flex items-center justify-center lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-1/2 lg:-translate-y-1/2 pointer-events-auto">
               <Link href="/" className="block py-0.5">
-                <MonclerLogo size="md" isNegative={!isWhiteMode} />
+                <MonclerLogo size="md" isNegative={isWhiteMode} />
               </Link>
             </div>
 

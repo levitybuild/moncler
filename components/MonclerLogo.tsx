@@ -7,7 +7,7 @@ interface MonclerLogoProps {
   isNegative?: boolean;
 }
 
-const LOGO_SRC = 'https://i.ibb.co/Q7v1T1Hg/IMG-20260925-WA0001.jpg';
+const WHITE_LOGO_URL = 'https://i.ibb.co/VY4fsPhd/1000786854-removebg-preview.png';
 
 export function MonclerLogo({ className = '', size = 'md', isNegative = false }: MonclerLogoProps) {
   const isInv = isNegative || className.includes('invert');
@@ -22,10 +22,10 @@ export function MonclerLogo({ className = '', size = 'md', isNegative = false }:
 
   return (
     <img
-      src={LOGO_SRC}
+      src={WHITE_LOGO_URL}
       alt="Moncler Logo"
       className={`w-auto object-contain transition-all duration-200 select-none ${sizeClasses[size]} ${
-        isInv ? 'invert mix-blend-screen' : 'mix-blend-multiply'
+        isInv ? 'invert' : ''
       } ${className}`}
       referrerPolicy="no-referrer"
     />
