@@ -1,0 +1,6 @@
+{
+  "name": "Moncler Official Online Store",
+  "description": "Discover luxury outerwear, down jackets, knitwear, and accessories from Moncler Collection, Grenoble, and Genius.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
