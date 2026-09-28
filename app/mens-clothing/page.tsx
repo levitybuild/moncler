@@ -11,14 +11,12 @@ import { Footer } from '@/components/Footer';
 import { Modals } from '@/components/Modals';
 import { MobileFloatingBar } from '@/components/MobileFloatingBar';
 import { FragmentCampaignSection } from '@/components/FragmentCampaignSection';
+import { CuratedCompositionsSection } from '@/components/CuratedCompositionsSection';
 
 // Generated asset paths for menswear campaign
 import mensOuterwearImg from '@/src/assets/images/mens_outerwear_hooded_1790463189204.jpg';
 import mensAccessoriesImg from '@/src/assets/images/mens_accessories_scarf_1790463201579.jpg';
 import fragmentVelvetImg from '@/src/assets/images/fragment_velvet_jacket_1790463215930.jpg';
-import look1Img from '@/src/assets/images/mens_look_travel_bag_1790463229599.jpg';
-import look2Img from '@/src/assets/images/mens_look_plaid_hat_1790463242369.jpg';
-import look3Img from '@/src/assets/images/mens_look_hoodie_side_1790463254009.jpg';
 import ravenlockJacketImg from '@/src/assets/images/moncler_ravenlock_jacket_1790463291190.jpg';
 import tanTshirtImg from '@/src/assets/images/moncler_tan_tshirt_1790463302766.jpg';
 import teddySweatshirtImg from '@/src/assets/images/moncler_teddy_sweatshirt_1790463278502.jpg';
@@ -34,31 +32,6 @@ interface CartItem {
   quantity: number;
   image: string;
 }
-
-// Curated Compositions Dress Picker data
-const curatedLooks = [
-  {
-    id: 'look-1',
-    name: 'Ravelis Hooded Zig-Zag Quilted Short Down Jacket',
-    price: '£1,590.00',
-    image: look1Img,
-    thumb: look1Img,
-  },
-  {
-    id: 'look-2',
-    name: 'Plaid Flannel & Down Overshirt Look',
-    price: '£1,420.00',
-    image: look2Img,
-    thumb: look2Img,
-  },
-  {
-    id: 'look-3',
-    name: 'Camel Corduroy & Quilted Jacket Ensemble',
-    price: '£1,680.00',
-    image: look3Img,
-    thumb: look3Img,
-  },
-];
 
 // Seasonal Signatures Carousel Items
 const seasonalSignatures = [
@@ -110,8 +83,7 @@ export default function MensClothingPage() {
     image: string;
   } | null>(null);
 
-  // Dress picker state
-  const [activeLookIndex, setActiveLookIndex] = useState(0);
+
 
   // Seasonal Signatures carousel state
   const [signatureIndex, setSignatureIndex] = useState(0);
@@ -175,14 +147,7 @@ export default function MensClothingPage() {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // Curated look navigation
-  const handleNextLook = () => {
-    setActiveLookIndex((prev) => (prev + 1) % curatedLooks.length);
-  };
 
-  const handlePrevLook = () => {
-    setActiveLookIndex((prev) => (prev - 1 + curatedLooks.length) % curatedLooks.length);
-  };
 
   // Seasonal Signatures navigation
   const handleNextSignature = () => {
@@ -208,7 +173,7 @@ export default function MensClothingPage() {
     signatureTouchStartX.current = null;
   };
 
-  const currentLook = curatedLooks[activeLookIndex] || curatedLooks[0];
+
 
   return (
     <div
@@ -293,158 +258,17 @@ export default function MensClothingPage() {
         onDiscoverMore={() => setIsPeaksOpen(true)}
       />
 
-      {/* 5. Curated Compositions (Dress Picker from Homepage reused & styled for Menswear) */}
-      <section className="w-full bg-[#f9f9f8] relative py-14 sm:py-20 lg:py-24 overflow-hidden border-t border-neutral-100">
-        <div className="w-full max-w-[1520px] mx-auto px-6 sm:px-10 lg:px-16">
-          {/* Header Row */}
-          <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 relative z-20 mb-8 sm:mb-12">
-            <div>
-              <h2 className="text-[28px] sm:text-[34px] lg:text-[38px] font-normal tracking-tight text-neutral-900 font-serif leading-tight">
-                Curated Compositions
-              </h2>
-            </div>
-
-            <div className="max-w-sm">
-              <p className="text-[13px] text-neutral-700 font-light leading-[1.65] mb-4">
-                Designed to be worn, layered and reimagined, each layer speaks to the next, unlocking endless possibilities for expression.
-              </p>
-              <button
-                type="button"
-                onClick={() => setIsSignupOpen(true)}
-                className="group inline-flex items-center gap-1.5 text-[12px] tracking-[0.14em] uppercase text-neutral-950 font-medium hover:opacity-75 transition-opacity cursor-pointer"
-              >
-                <span>SHOP NOW</span>
-                <ChevronRight className="w-3.5 h-3.5 stroke-[2] transition-transform duration-200 group-hover:translate-x-0.5" />
-              </button>
-            </div>
-          </div>
-
-          {/* Main Stage Look Preview */}
-          <div className="relative w-full flex flex-col md:flex-row items-center justify-center">
-            {/* Centered Large Hero Look Model */}
-            <div className="flex flex-col items-center">
-              <div
-                className="relative w-[320px] sm:w-[420px] md:w-[480px] lg:w-[540px] h-[500px] sm:h-[620px] md:h-[680px] lg:h-[720px] cursor-pointer"
-                onClick={() =>
-                  setQuickViewProduct({
-                    name: currentLook.name,
-                    price: currentLook.price,
-                    image: typeof currentLook.image === 'string' ? currentLook.image : currentLook.image.src,
-                  })
-                }
-              >
-                <Image
-                  src={currentLook.image}
-                  alt={currentLook.name}
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 90vw, 540px"
-                  className="object-contain object-center transition-opacity duration-300"
-                  referrerPolicy="no-referrer"
-                />
-              </div>
-
-              {/* Product Info */}
-              <div className="text-center mt-4 px-4 max-w-lg">
-                <h3 className="text-[14px] sm:text-[15px] font-normal text-neutral-900 tracking-[-0.01em]">
-                  {currentLook.name}
-                </h3>
-                <p className="text-[13px] sm:text-[14px] font-normal text-neutral-900 mt-0.5 tabular-nums">
-                  {currentLook.price}
-                </p>
-              </div>
-            </div>
-
-            {/* Desktop Right Vertical Thumbnails */}
-            <div className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 items-center z-20">
-              <div className="flex flex-col items-center gap-2 mr-3">
-                <button
-                  type="button"
-                  onClick={handlePrevLook}
-                  aria-label="Previous look"
-                  className="p-1 text-neutral-800 hover:text-black transition-colors cursor-pointer"
-                >
-                  <ChevronUp className="w-4 h-4 stroke-[1.75]" />
-                </button>
-                <button
-                  type="button"
-                  onClick={handleNextLook}
-                  aria-label="Next look"
-                  className="p-1 text-neutral-800 hover:text-black transition-colors cursor-pointer"
-                >
-                  <ChevronDown className="w-4 h-4 stroke-[1.75]" />
-                </button>
-              </div>
-
-              {/* Thumbnail column */}
-              <div className="flex flex-col gap-3">
-                {curatedLooks.map((look, idx) => (
-                  <button
-                    key={look.id}
-                    type="button"
-                    onClick={() => setActiveLookIndex(idx)}
-                    className={`relative w-[60px] lg:w-[72px] h-[90px] lg:h-[105px] border transition-all cursor-pointer overflow-hidden ${
-                      activeLookIndex === idx
-                        ? 'border-neutral-900 opacity-100 ring-1 ring-neutral-900'
-                        : 'border-transparent opacity-60 hover:opacity-100'
-                    }`}
-                  >
-                    <Image
-                      src={look.thumb}
-                      alt={look.name}
-                      fill
-                      sizes="72px"
-                      className="object-cover object-top"
-                      referrerPolicy="no-referrer"
-                    />
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Mobile Bottom Thumbnails Row */}
-            <div className="md:hidden flex items-center justify-center gap-3 mt-6">
-              <button
-                type="button"
-                onClick={handlePrevLook}
-                className="p-1.5 text-neutral-600 hover:text-neutral-900"
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <div className="flex items-center gap-2">
-                {curatedLooks.map((look, idx) => (
-                  <button
-                    key={look.id}
-                    type="button"
-                    onClick={() => setActiveLookIndex(idx)}
-                    className={`relative w-[50px] h-[75px] border overflow-hidden transition-all ${
-                      activeLookIndex === idx
-                        ? 'border-neutral-900 opacity-100'
-                        : 'border-neutral-200 opacity-60'
-                    }`}
-                  >
-                    <Image
-                      src={look.thumb}
-                      alt={look.name}
-                      fill
-                      sizes="50px"
-                      className="object-cover object-top"
-                      referrerPolicy="no-referrer"
-                    />
-                  </button>
-                ))}
-              </div>
-              <button
-                type="button"
-                onClick={handleNextLook}
-                className="p-1.5 text-neutral-600 hover:text-neutral-900"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* 5. Curated Compositions (Direct clone of A Change in the Air with header text Curated Compositions) */}
+      <CuratedCompositionsSection
+        onSelectProduct={(product) =>
+          setQuickViewProduct({
+            name: product.name,
+            price: product.price,
+            image: product.image,
+          })
+        }
+        onShopCategory={() => setIsSignupOpen(true)}
+      />
 
       {/* 6. Renewed Rhythm (3 Category Grid: Outerwear, Knitwear, Accessories) */}
       <section className="w-full bg-white py-14 sm:py-20 lg:py-24 px-6 sm:px-10 lg:px-16">

@@ -9,6 +9,7 @@ import {
   MessageSquare, 
   Search, 
   Heart, 
+  Bookmark,
   User, 
   ShoppingBag, 
   Menu, 
@@ -16,6 +17,11 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { MobileMenuBottomDrawer } from './MobileMenuBottomDrawer';
+
+import searchCreamJacketImg from '@/src/assets/images/search_featured_cream_jacket_1790599131630.jpg';
+import searchBlackJacketImg from '@/src/assets/images/search_featured_black_jacket_1790599142811.jpg';
+import searchBurgundyJacketImg from '@/src/assets/images/search_featured_burgundy_jacket_1790599159832.jpg';
+import searchRedJacketImg from '@/src/assets/images/search_featured_red_jacket_1790599172403.jpg';
 
 interface NavbarProps {
   onOpenSearch: () => void;
@@ -306,7 +312,84 @@ const megaMenuCatalog: Record<string, MegaMenuData> = {
       href: '#in-moncler',
     },
   },
+  Collections: {
+    category: 'Collections',
+    columns: [
+      {
+        title: 'Moncler Collections',
+        items: [
+          { label: 'View All Collections', href: '#collections' },
+          { label: 'Moncler Collection', href: '#collections' },
+          { label: 'Moncler Grenoble', href: '#grenoble' },
+          { label: 'Moncler Genius', href: '#collections' },
+          { label: 'Moncler x Fragment', href: '/mens-clothing' },
+        ],
+      },
+      {
+        title: 'Highlights',
+        items: [
+          { label: 'Autumn / Winter 2026', href: '#new-in' },
+          { label: 'Renewed Rhythm', href: '/mens-clothing' },
+          { label: 'A Change in the Air', href: '#change-in-the-air' },
+          { label: 'Icons & Essentials', href: '#women' },
+        ],
+      },
+      {
+        title: 'Services & Stories',
+        items: [
+          { label: 'Editorial Looks', href: '#editorial' },
+          { label: 'Store Locator', href: '/contact' },
+          { label: 'Book an Appointment', href: '/contact' },
+          { label: 'Client Service', href: '/client-service' },
+        ],
+      },
+    ],
+    featured: {
+      imageUrl:
+        'https://moncler-cdn.thron.com/api/v1/content-delivery/shares/pyvhkj/contents/0e70bae0-674b-4adc-b6a4-ea112040c783/image/moncler-discover-genius-collection?q_auto=high&q=90&w=1900',
+      caption: 'Moncler Genius Autumn/Winter 2026',
+      href: '#collections',
+    },
+  },
 };
+
+const featuredSearchItems = [
+  {
+    id: 'feat-cream',
+    name: 'Badyf Hooded Short Down Jacket',
+    price: '£1,450.00',
+    image: searchCreamJacketImg,
+    href: '/product',
+  },
+  {
+    id: 'feat-black',
+    name: 'Maya High-Gloss Nylon Laqué Down Jacket',
+    price: '£1,380.00',
+    image: searchBlackJacketImg,
+    href: '/product',
+  },
+  {
+    id: 'feat-burgundy',
+    name: 'Maya Shiny Lacquered Short Down Jacket',
+    price: '£1,380.00',
+    image: searchBurgundyJacketImg,
+    href: '/product',
+  },
+  {
+    id: 'feat-red',
+    name: 'Maya 70 Anniversary Short Down Jacket',
+    price: '£1,420.00',
+    image: searchRedJacketImg,
+    href: '/product',
+  },
+];
+
+const featuredCategories = [
+  { label: 'New In for Women', href: '#women' },
+  { label: 'New In for Men', href: '/mens-clothing' },
+  { label: 'Outerwear for Women', href: '#women' },
+  { label: 'Outerwear for Men', href: '/mens-clothing' },
+];
 
 export function Navbar({
   onOpenSearch,
@@ -335,20 +418,37 @@ export function Navbar({
   const [activeMegaCategory, setActiveMegaCategory] = useState<string | null>(null);
   const [isMegaMenuMounted, setIsMegaMenuMounted] = useState(false);
 
+  // Desktop Search Mega Nav state
+  const [isSearchMegaOpen, setIsSearchMegaOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
   const lastScrollY = useRef(0);
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const isMenuOpen = isMobileMenuOpen !== undefined ? isMobileMenuOpen : internalMenuOpen;
   const setMenuOpen = onSetMobileMenuOpen || setInternalMenuOpen;
 
+  // Close search mega nav on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isSearchMegaOpen) {
+        setIsSearchMegaOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isSearchMegaOpen]);
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      // Close mega menu on scroll
-      if (activeMegaCategory && currentScrollY > 20) {
+      // Close mega menu and search mega nav on scroll
+      if ((activeMegaCategory || isSearchMegaOpen) && currentScrollY > 20) {
         setActiveMegaCategory(null);
         setIsMegaMenuMounted(false);
+        setIsSearchMegaOpen(false);
       }
 
       if (currentScrollY <= 15) {
@@ -367,7 +467,7 @@ export function Navbar({
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [activeMegaCategory]);
+  }, [activeMegaCategory, isSearchMegaOpen]);
 
   const handleMouseEnter = () => {
     if (closeTimeoutRef.current) {
@@ -383,6 +483,7 @@ export function Navbar({
       setIsNavHovered(false);
       setActiveMegaCategory(null);
       setIsMegaMenuMounted(false);
+      setIsSearchMegaOpen(false);
       onHoverChange?.(false);
     }, 220);
   };
@@ -392,16 +493,49 @@ export function Navbar({
       clearTimeout(closeTimeoutRef.current);
       closeTimeoutRef.current = null;
     }
+    setIsSearchMegaOpen(false); // Close search when hovering category links
     setIsNavHovered(true);
     onHoverChange?.(true);
     setActiveMegaCategory(category);
     setIsMegaMenuMounted(true);
   };
 
+  const handleSearchMouseEnter = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
+      setActiveMegaCategory(null);
+      setIsMegaMenuMounted(false);
+      setIsSearchMegaOpen(true);
+      setIsNavHovered(true);
+      onHoverChange?.(true);
+      setTimeout(() => searchInputRef.current?.focus(), 60);
+    }
+  };
+
+  const handleSearchClick = () => {
+    if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
+      setIsSearchMegaOpen((prev) => {
+        const next = !prev;
+        if (next) {
+          setActiveMegaCategory(null);
+          setIsMegaMenuMounted(false);
+          setTimeout(() => searchInputRef.current?.focus(), 60);
+        }
+        return next;
+      });
+    } else {
+      onOpenSearch();
+    }
+  };
+
   // Determine if navbar is in white/ivory mode
   const isWhiteMode = !isHeroOverlayPage
     ? true
     : Boolean(activeMegaCategory) ||
+      isSearchMegaOpen ||
       (!isAtTop && scrollDirection === 'up') ||
       (isAtTop && (isNavHovered || isAnnouncementHovered));
 
@@ -412,17 +546,25 @@ export function Navbar({
     { label: 'Children', href: '#children' },
     { label: 'Grenoble', href: '#grenoble' },
     { label: 'In Moncler', href: '#in-moncler' },
+    { label: 'Collections', href: '#collections' },
   ];
 
   const currentMegaData = activeMegaCategory ? megaMenuCatalog[activeMegaCategory] : null;
 
   return (
     <>
-      {/* Dark blur backdrop overlay: appears smoothly under navbar when mega menu is open */}
+      {/* Dark blur backdrop overlay: appears smoothly under navbar when mega menu or search mega nav is open */}
       <div
-        className={`fixed inset-0 top-[72px] z-30 bg-black/50 backdrop-blur-md transition-opacity duration-300 pointer-events-none ${
-          activeMegaCategory ? 'opacity-100' : 'opacity-0'
+        className={`fixed inset-0 top-[72px] z-30 bg-black/40 backdrop-blur-xs transition-opacity duration-300 ${
+          activeMegaCategory || isSearchMegaOpen
+            ? 'opacity-100 pointer-events-auto'
+            : 'opacity-0 pointer-events-none'
         }`}
+        onClick={() => {
+          setActiveMegaCategory(null);
+          setIsMegaMenuMounted(false);
+          setIsSearchMegaOpen(false);
+        }}
         aria-hidden="true"
       />
 
@@ -444,7 +586,7 @@ export function Navbar({
         <div className="w-full px-4 sm:px-6 lg:px-12 py-3.5 lg:py-4">
           <div className="relative flex items-center justify-center lg:justify-between">
             {/* Desktop: Primary Nav Links with Line Trace Animation on Hover */}
-            <nav className="hidden lg:flex items-center space-x-7 xl:space-x-9 text-[12px] xl:text-[13px] font-normal tracking-wide">
+            <nav className="hidden lg:flex items-center space-x-7 xl:space-x-8 text-[14px] font-normal tracking-wide">
               {navLinks.map((link) => {
                 const isActive = activeMegaCategory === link.label;
                 return (
@@ -455,18 +597,19 @@ export function Navbar({
                   >
                     <a
                       href={link.href}
-                      className={`relative inline-block transition-colors duration-150 py-1 ${
+                      style={{ fontSize: '14px' }}
+                      className={`group relative inline-block transition-colors duration-150 py-0.5 text-[14px] leading-snug ${
                         isWhiteMode
                           ? 'text-neutral-900 hover:text-black'
                           : 'text-white/95 hover:text-white'
                       }`}
                     >
                       <span>{link.label}</span>
-                      {/* Line Trace Animation */}
+                      {/* Line Trace Animation: thinner and closer to the text on hover */}
                       <span
-                        className={`absolute bottom-0 left-0 h-[1.5px] transition-all duration-300 ease-out ${
+                        className={`absolute bottom-0 left-0 h-[1px] transition-all duration-300 ease-out pointer-events-none ${
                           isWhiteMode ? 'bg-black' : 'bg-white'
-                        } ${isActive ? 'w-full' : 'w-0 hover:w-full'}`}
+                        } ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`}
                       />
                     </a>
                   </div>
@@ -502,8 +645,9 @@ export function Navbar({
               {/* Search */}
               <button
                 type="button"
-                onClick={onOpenSearch}
-                className={`p-1 transition-colors ${
+                onClick={handleSearchClick}
+                onMouseEnter={handleSearchMouseEnter}
+                className={`p-1 transition-colors cursor-pointer ${
                   isWhiteMode ? 'text-black hover:text-neutral-600' : 'text-white hover:text-neutral-300'
                 }`}
                 aria-label="Search Moncler collection"
@@ -515,12 +659,12 @@ export function Navbar({
               <button
                 type="button"
                 onClick={onOpenAccount}
-                className={`p-1 transition-colors relative ${
+                className={`p-1 transition-colors relative cursor-pointer ${
                   isWhiteMode ? 'text-black hover:text-neutral-600' : 'text-white hover:text-neutral-300'
                 }`}
                 aria-label="Wishlist"
               >
-                <Heart className="w-[18px] h-[18px] stroke-[1.5]" />
+                <Bookmark className="w-[18px] h-[18px] stroke-[1.5]" />
                 {wishlistCount > 0 && (
                   <span
                     className={`absolute -top-1 -right-1 w-2 h-2 rounded-full ${
@@ -562,6 +706,190 @@ export function Navbar({
                   </span>
                 )}
               </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop Search Mega Nav Dropdown: Exact match to uploaded screenshot */}
+        <div
+          className={`hidden lg:block overflow-hidden transition-all duration-300 ease-out origin-top border-t border-neutral-200/60 bg-[#f9f9f8] text-black shadow-none relative ${
+            isSearchMegaOpen
+              ? 'min-h-[65vh] opacity-100'
+              : 'max-h-0 min-h-0 opacity-0 pointer-events-none'
+          }`}
+        >
+          {/* Main Top Area */}
+          <div className="w-full px-4 sm:px-6 lg:px-12 pt-6 pb-20">
+            {/* Top Row: "Search" label and Close "✕" button */}
+            <div className="flex items-center justify-between">
+              <span className="text-[13px] text-neutral-800 font-normal">
+                Search
+              </span>
+              <button
+                type="button"
+                onClick={() => setIsSearchMegaOpen(false)}
+                className="p-1 text-neutral-800 hover:text-black transition-colors cursor-pointer"
+                aria-label="Close search"
+              >
+                <X className="w-5 h-5 stroke-[1.2]" />
+              </button>
+            </div>
+
+            {/* Large "Type to search" input */}
+            <div className="mt-8 lg:mt-10 mb-1">
+              <input
+                ref={searchInputRef}
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Type to search"
+                className="w-full bg-transparent text-[34px] sm:text-[38px] lg:text-[42px] font-light text-neutral-900 placeholder:text-neutral-400 tracking-[-0.02em] leading-tight outline-none border-none py-1 selection:bg-neutral-900 selection:text-white"
+              />
+            </div>
+
+            {/* Full Width Thin Divider Line */}
+            <div className="w-full h-[1px] bg-neutral-200/80 mb-8 lg:mb-10" />
+
+            {/* Two Column Content: Featured Items & Featured Categories */}
+            {searchQuery.trim().length === 0 ? (
+              <div className="grid grid-cols-12 gap-8 items-start">
+                {/* Left Column: Featured Items */}
+                <div className="col-span-6">
+                  <h4 className="text-[13px] font-normal text-neutral-500 mb-3 tracking-[-0.01em]">
+                    Featured Items
+                  </h4>
+                  <div className="flex items-center gap-[0.2em]">
+                    {featuredSearchItems.map((item) => (
+                      <Link
+                        key={item.id}
+                        href={item.href}
+                        onClick={() => setIsSearchMegaOpen(false)}
+                        className="group relative flex flex-col items-center justify-center w-[98px] sm:w-[110px] h-[132px] sm:h-[148px] bg-[#f2f1ee] p-1.5 hover:bg-[#eae8e4] transition-colors cursor-pointer overflow-hidden shrink-0"
+                      >
+                        <div className="relative w-full h-full">
+                          <Image
+                            src={item.image}
+                            alt={item.name}
+                            fill
+                            sizes="110px"
+                            className="object-contain object-center transition-transform duration-500 group-hover:scale-105"
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Right Column: Featured Categories */}
+                <div className="col-span-6 pl-4 lg:pl-16">
+                  <h4 className="text-[13px] font-normal text-neutral-500 mb-3 tracking-[-0.01em]">
+                    Featured Categories
+                  </h4>
+                  <ul className="space-y-2">
+                    {featuredCategories.map((cat) => (
+                      <li key={cat.label}>
+                        <Link
+                          href={cat.href}
+                          onClick={() => setIsSearchMegaOpen(false)}
+                          className="text-[13px] text-neutral-900 font-normal hover:opacity-70 transition-opacity block leading-relaxed"
+                        >
+                          {cat.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ) : (
+              /* Dynamic filtered search results when user types */
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-[13px] text-neutral-500">
+                    Results for &ldquo;{searchQuery}&rdquo;
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery('')}
+                    className="text-[13px] text-neutral-600 hover:text-black underline cursor-pointer"
+                  >
+                    Clear
+                  </button>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  {featuredSearchItems
+                    .filter((p) =>
+                      p.name.toLowerCase().includes(searchQuery.toLowerCase())
+                    )
+                    .concat(featuredSearchItems)
+                    .slice(0, 4)
+                    .map((prod) => (
+                      <Link
+                        key={prod.id}
+                        href="/product"
+                        onClick={() => setIsSearchMegaOpen(false)}
+                        className="group flex flex-col cursor-pointer"
+                      >
+                        <div className="relative aspect-[3/4] bg-[#f2f1ee] mb-2 overflow-hidden flex items-center justify-center">
+                          <Image
+                            src={prod.image}
+                            alt={prod.name}
+                            fill
+                            sizes="200px"
+                            className="object-contain object-center p-3 transition-transform duration-500 group-hover:scale-105"
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
+                        <h5 className="text-[13px] text-neutral-900 font-normal line-clamp-1 group-hover:underline">
+                          {prod.name}
+                        </h5>
+                        <p className="text-[13px] text-neutral-500 mt-0.5">
+                          {prod.price}
+                        </p>
+                      </Link>
+                    ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Bottom Assistance Bar - fixed directly at the bottom of the search section */}
+          <div className="absolute bottom-0 left-0 right-0 w-full bg-[#f2f1ee] border-t border-neutral-200/60 py-3.5 px-4 sm:px-6 lg:px-12 z-10">
+            <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-3 text-[13px]">
+              <span className="text-neutral-600 font-normal">Need assistance?</span>
+              <div className="flex flex-wrap items-center gap-3 text-neutral-900 font-normal">
+                <Link
+                  href="/contact"
+                  onClick={() => setIsSearchMegaOpen(false)}
+                  className="hover:underline transition-all"
+                >
+                  Contact Us
+                </Link>
+                <span className="text-neutral-300">|</span>
+                <Link
+                  href="/contact"
+                  onClick={() => setIsSearchMegaOpen(false)}
+                  className="hover:underline transition-all"
+                >
+                  Store Locator
+                </Link>
+                <span className="text-neutral-300">|</span>
+                <Link
+                  href="/client-service"
+                  onClick={() => setIsSearchMegaOpen(false)}
+                  className="hover:underline transition-all"
+                >
+                  Shopping & Product Advice
+                </Link>
+                <span className="text-neutral-300">|</span>
+                <Link
+                  href="/contact"
+                  onClick={() => setIsSearchMegaOpen(false)}
+                  className="hover:underline transition-all"
+                >
+                  Book An Appointment
+                </Link>
+              </div>
             </div>
           </div>
         </div>

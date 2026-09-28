@@ -1,9 +1,49 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, Search, Check, ShoppingBag, Send, Trash2, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+
+// Featured jacket images for search overlay
+import creamJacketImg from '@/src/assets/images/search_featured_cream_jacket_1790599131630.jpg';
+import blackJacketImg from '@/src/assets/images/search_featured_black_jacket_1790599142811.jpg';
+import burgundyJacketImg from '@/src/assets/images/search_featured_burgundy_jacket_1790599159832.jpg';
+import redJacketImg from '@/src/assets/images/search_featured_red_jacket_1790599172403.jpg';
+
+const mobileSearchFeaturedCategories = [
+  { label: 'New In for Women', href: '/summer-collection' },
+  { label: 'New In for Men', href: '/mens-clothing' },
+  { label: 'Outerwear for Women', href: '/ready-to-wear' },
+  { label: 'Outerwear for Men', href: '/mens-clothing' },
+];
+
+const mobileSearchFeaturedItems = [
+  {
+    id: 'item-1',
+    name: 'Maya Short Down Jacket - Cream',
+    image: creamJacketImg,
+    href: '/product',
+  },
+  {
+    id: 'item-2',
+    name: 'Maya Short Down Jacket - Black',
+    image: blackJacketImg,
+    href: '/product',
+  },
+  {
+    id: 'item-3',
+    name: 'Maya Short Down Jacket - Burgundy',
+    image: burgundyJacketImg,
+    href: '/product',
+  },
+  {
+    id: 'item-4',
+    name: 'Maya 70 Short Down Jacket - Red',
+    image: redJacketImg,
+    href: '/product',
+  },
+];
 
 interface ModalsProps {
   // Search
@@ -55,6 +95,23 @@ export function Modals({
 }: ModalsProps) {
   // Search state
   const [searchQuery, setSearchQuery] = useState('');
+
+  // Lock body scroll and handle Escape key for search overlay
+  useEffect(() => {
+    if (isSearchOpen) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') onCloseSearch();
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isSearchOpen, onCloseSearch]);
   // Quick view size
   const [selectedSize, setSelectedSize] = useState('2');
   // Newsletter state
@@ -106,55 +163,123 @@ export function Modals({
 
   return (
     <>
-      {/* 1. SEARCH MODAL */}
+      {/* 1. SEARCH OVERLAY (MATCHING MOBILE SCREENSHOT WITH HIGHER Z-INDEX THAN BOTTOM NAV) */}
       {isSearchOpen && (
-        <div className="fixed inset-0 z-50 flex flex-col bg-white">
-          <div className="max-w-5xl w-full mx-auto p-6 sm:p-8 flex-1 flex flex-col">
-            <div className="flex items-center justify-between pb-6 border-b border-neutral-200">
-              <span className="text-xs uppercase tracking-widest text-neutral-400 font-medium">
-                Search Moncler
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Search"
+          className="fixed inset-0 z-[70] bg-white overflow-y-auto flex flex-col justify-between animate-in fade-in duration-200"
+        >
+          <div className="w-full flex-1 flex flex-col">
+            {/* Top Bar with 'Search' & '✕' */}
+            <div className="flex items-center justify-between px-5 pt-5 pb-3">
+              <span className="text-[17px] text-neutral-900 font-normal tracking-[-0.01em]">
+                Search
               </span>
               <button
                 type="button"
                 onClick={onCloseSearch}
-                className="p-2 text-neutral-500 hover:text-black cursor-pointer"
+                aria-label="Close search"
+                className="p-1 -mr-1 text-neutral-800 hover:text-black cursor-pointer"
               >
-                <X className="w-5 h-5 stroke-[1.5]" />
+                <X className="w-5 h-5 stroke-[1.25]" />
               </button>
             </div>
 
-            <div className="pt-8">
-              <div className="relative">
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search jackets, knitwear, footwear..."
-                  autoFocus
-                  className="w-full text-xl sm:text-3xl font-light text-neutral-900 border-b border-black pb-3 outline-none placeholder:text-neutral-300"
-                />
-                <Search className="absolute right-2 bottom-4 w-6 h-6 text-neutral-400 stroke-[1.5]" />
-              </div>
+            {/* Large Search Input with underline */}
+            <div className="px-5 pt-3 pb-6">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Type to search"
+                autoFocus
+                className="w-full text-[28px] sm:text-[34px] font-light text-neutral-900 placeholder:text-neutral-400 outline-none bg-transparent"
+              />
+              <div className="h-[1px] bg-neutral-200/90 w-full mt-3" />
+            </div>
 
-              <div className="mt-8">
-                <p className="text-[11px] uppercase tracking-wider text-neutral-400 mb-4 font-medium">
-                  Trending Searches
-                </p>
-                <div className="flex flex-wrap gap-2 text-xs">
-                  {['Down Jackets', 'Grenoble Skiwear', 'Wool Knitwear', 'Trailgrip Boots', 'Genius Collection', 'Eyewear'].map(
-                    (term) => (
-                      <button
-                        key={term}
-                        type="button"
-                        onClick={() => setSearchQuery(term)}
-                        className="px-3 py-1.5 bg-neutral-100 hover:bg-black hover:text-white transition-colors cursor-pointer"
-                      >
-                        {term}
-                      </button>
-                    )
-                  )}
-                </div>
+            {/* Featured Categories (First section as in mobile screenshot) */}
+            <div className="px-5 pb-7">
+              <p className="text-[13px] text-neutral-500 font-normal mb-3">
+                Featured Categories
+              </p>
+              <div className="flex flex-col space-y-2">
+                {mobileSearchFeaturedCategories.map((cat) => (
+                  <Link
+                    key={cat.label}
+                    href={cat.href}
+                    onClick={onCloseSearch}
+                    className="text-[13px] text-neutral-900 hover:opacity-75 transition-opacity block py-0.5"
+                  >
+                    {cat.label}
+                  </Link>
+                ))}
               </div>
+            </div>
+
+            {/* Featured Items (Second section as in mobile screenshot) */}
+            <div className="px-5 pb-10">
+              <p className="text-[13px] text-neutral-500 font-normal mb-3">
+                Featured Items
+              </p>
+              <div className="grid grid-cols-4 gap-[0.2em]">
+                {mobileSearchFeaturedItems.map((item) => (
+                  <Link
+                    key={item.id}
+                    href={item.href}
+                    onClick={onCloseSearch}
+                    className="group block relative aspect-[3/4] bg-[#f6f5f3] overflow-hidden"
+                  >
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      fill
+                      sizes="25vw"
+                      className="object-contain p-1 transition-transform duration-300 group-hover:scale-105"
+                      referrerPolicy="no-referrer"
+                    />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Need Assistance Bottom Section (Matching mobile screenshot) */}
+          <div className="w-full bg-[#f8f8f6] px-5 py-7 border-t border-neutral-200/50 mt-auto">
+            <p className="text-[13px] text-neutral-500 font-normal mb-4">
+              Need assistance?
+            </p>
+            <div className="flex flex-col space-y-3">
+              <Link
+                href="/contact"
+                onClick={onCloseSearch}
+                className="text-[13px] text-neutral-900 hover:opacity-75 transition-opacity block py-0.5"
+              >
+                Contact Us
+              </Link>
+              <Link
+                href="/client-service"
+                onClick={onCloseSearch}
+                className="text-[13px] text-neutral-900 hover:opacity-75 transition-opacity block py-0.5"
+              >
+                Store Locator
+              </Link>
+              <Link
+                href="/client-service"
+                onClick={onCloseSearch}
+                className="text-[13px] text-neutral-900 hover:opacity-75 transition-opacity block py-0.5"
+              >
+                Shopping & Product Advice
+              </Link>
+              <Link
+                href="/contact"
+                onClick={onCloseSearch}
+                className="text-[13px] text-neutral-900 hover:opacity-75 transition-opacity block py-0.5"
+              >
+                Book An Appointment
+              </Link>
             </div>
           </div>
         </div>
