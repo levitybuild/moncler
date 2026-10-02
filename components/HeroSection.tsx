@@ -13,6 +13,7 @@ interface HeroSectionProps {
 const heroImages = [
   {
     id: 1,
+    title: 'Autumn/Winter 2026',
     desktopUrl:
       'https://azure-eu-images.contentstack.com/v3/assets/blt70cb06b4414428cc/bltd33293f7bee7893a/6aa7fef38f05ce161d9f18b7/MC_FW_2026_DIGITALCAMPAIGN_DS_RGB_150DPI_16X9_21.jpg?branch=prod_1&auto=auto&width=90p&quality=90',
     mobileUrl:
@@ -21,6 +22,7 @@ const heroImages = [
   },
   {
     id: 2,
+    title: 'Autumn/Winter 2026',
     desktopUrl:
       'https://azure-eu-images.contentstack.com/v3/assets/blt70cb06b4414428cc/blt37d49f6704f623bc/6aa7ff7fc2a7875c326f3242/MC_FW_2026_DIGITALCAMPAIGN_DS_RGB_150DPI_16X9_6-2.jpg?branch=prod_1&auto=auto&width=90p&quality=90',
     mobileUrl:
@@ -60,6 +62,7 @@ const variants: Variants = {
 export function HeroSection({ onShopWomen, onShopMen }: HeroSectionProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(1);
+  const [isPaused, setIsPaused] = useState(false);
   const touchStartY = useRef<number | null>(null);
   const touchStartX = useRef<number | null>(null);
   const isAnimating = useRef(false);
@@ -74,8 +77,10 @@ export function HeroSection({ onShopWomen, onShopMen }: HeroSectionProps) {
     }, 850);
   };
 
-  // Auto transition every 5 seconds
+  // Auto transition every 5 seconds (paused if isPaused is true)
   React.useEffect(() => {
+    if (isPaused) return;
+
     const timer = setInterval(() => {
       if (isAnimating.current) return;
       isAnimating.current = true;
@@ -87,7 +92,7 @@ export function HeroSection({ onShopWomen, onShopMen }: HeroSectionProps) {
     }, 5000);
 
     return () => clearInterval(timer);
-  }, [currentIndex]);
+  }, [currentIndex, isPaused]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartY.current = e.touches[0].clientY;
@@ -173,7 +178,7 @@ export function HeroSection({ onShopWomen, onShopMen }: HeroSectionProps) {
 
         {/* Headline */}
         <h1 className="text-2xl sm:text-3xl md:text-[36px] font-light tracking-wide text-white mb-6 sm:mb-8">
-          Outerwear Essentials
+          {heroImages[currentIndex].title}
         </h1>
 
         {/* Action Links */}
@@ -195,6 +200,63 @@ export function HeroSection({ onShopWomen, onShopMen }: HeroSectionProps) {
             <span>SHOP MEN</span>
             <ChevronRight className="w-3.5 h-3.5 stroke-[2] transition-transform duration-200 group-hover:translate-x-0.5" />
           </button>
+        </div>
+
+        {/* Carousel Controls: Pause button on the left, Dynamic Progress Lines in the center */}
+        <div className="w-full max-w-sm sm:max-w-md mx-auto mt-6 sm:mt-7 relative flex items-center justify-center">
+          {/* Pause / Play Button */}
+          <button
+            type="button"
+            onClick={() => setIsPaused((prev) => !prev)}
+            aria-label={isPaused ? 'Resume slideshow' : 'Pause slideshow'}
+            className="absolute left-1 sm:left-3 w-7 h-7 bg-black/50 hover:bg-black/70 backdrop-blur-xs flex items-center justify-center transition-colors cursor-pointer"
+          >
+            {isPaused ? (
+              <svg
+                className="w-2.5 h-2.5 fill-white text-white ml-0.5"
+                viewBox="0 0 24 24"
+              >
+                <polygon points="6 4 20 12 6 20 6 4" />
+              </svg>
+            ) : (
+              <span className="flex items-center gap-[2.5px]">
+                <span className="w-[2px] h-[9px] bg-white rounded-none" />
+                <span className="w-[2px] h-[9px] bg-white rounded-none" />
+              </span>
+            )}
+          </button>
+
+          {/* Centered Progress Lines */}
+          <div className="flex items-center gap-2">
+            {heroImages.map((_, index) => {
+              const isActive = currentIndex === index;
+              return (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() => goToSlide(index, index > currentIndex ? 1 : -1)}
+                  aria-label={`Go to slide ${index + 1}`}
+                  className="py-2.5 flex items-center cursor-pointer group"
+                >
+                  <div
+                    className={`h-[1.5px] transition-[width] duration-300 ease-out relative overflow-hidden ${
+                      isActive ? 'w-[54px] bg-white/30' : 'w-[26px] bg-white/40 group-hover:bg-white/60'
+                    }`}
+                  >
+                    {isActive && (
+                      <div
+                        key={`progress-${currentIndex}`}
+                        className="h-full bg-white animate-hero-progress"
+                        style={{
+                          animationPlayState: isPaused ? 'paused' : 'running',
+                        }}
+                      />
+                    )}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

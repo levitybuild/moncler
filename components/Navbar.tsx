@@ -586,19 +586,18 @@ export function Navbar({
         <div className="w-full px-4 sm:px-6 lg:px-12 py-3.5 lg:py-4">
           <div className="relative flex items-center justify-center lg:justify-between">
             {/* Desktop: Primary Nav Links with Line Trace Animation on Hover */}
-            <nav className="hidden lg:flex items-center space-x-7 xl:space-x-8 text-[14px] font-normal tracking-wide">
+            <nav className="hidden lg:flex items-center space-x-3.5 xl:space-x-5 text-[12px] xl:text-[13px] font-normal tracking-wide">
               {navLinks.map((link) => {
                 const isActive = activeMegaCategory === link.label;
                 return (
                   <div
                     key={link.label}
                     onMouseEnter={() => handleLinkMouseEnter(link.label)}
-                    className="relative py-2"
+                    className="relative py-1.5"
                   >
                     <a
                       href={link.href}
-                      style={{ fontSize: '14px' }}
-                      className={`group relative inline-block transition-colors duration-150 py-0.5 text-[14px] leading-snug ${
+                      className={`group relative inline-block transition-colors duration-150 py-0.5 text-[12px] xl:text-[13px] leading-snug ${
                         isWhiteMode
                           ? 'text-neutral-900 hover:text-black'
                           : 'text-white/95 hover:text-white'
@@ -626,7 +625,7 @@ export function Navbar({
 
             {/* Utility Actions (Right Zone): Hidden on mobile, shown on desktop */}
             <div
-              className={`hidden lg:flex items-center space-x-4 xl:space-x-5 ${
+              className={`hidden lg:flex items-center space-x-3 xl:space-x-4 ${
                 isWhiteMode ? 'text-black' : 'text-white'
               }`}
             >
@@ -639,7 +638,7 @@ export function Navbar({
                 }`}
                 aria-label="Start chat with Client Advisor"
               >
-                <MessageSquare className="w-[18px] h-[18px] stroke-[1.5]" />
+                <MessageSquare className="w-4 h-4 stroke-[1.35]" />
               </button>
 
               {/* Search */}
@@ -652,7 +651,7 @@ export function Navbar({
                 }`}
                 aria-label="Search Moncler collection"
               >
-                <Search className="w-[18px] h-[18px] stroke-[1.5]" />
+                <Search className="w-4 h-4 stroke-[1.35]" />
               </button>
 
               {/* Wishlist */}
@@ -664,10 +663,10 @@ export function Navbar({
                 }`}
                 aria-label="Wishlist"
               >
-                <Bookmark className="w-[18px] h-[18px] stroke-[1.5]" />
+                <Bookmark className="w-4 h-4 stroke-[1.35]" />
                 {wishlistCount > 0 && (
                   <span
-                    className={`absolute -top-1 -right-1 w-2 h-2 rounded-full ${
+                    className={`absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full ${
                       isWhiteMode ? 'bg-black' : 'bg-white'
                     }`}
                   />
@@ -683,7 +682,7 @@ export function Navbar({
                 }`}
                 aria-label="My Moncler Account"
               >
-                <User className="w-[18px] h-[18px] stroke-[1.5]" />
+                <User className="w-4 h-4 stroke-[1.35]" />
               </button>
 
               {/* Shopping Bag */}
@@ -695,10 +694,10 @@ export function Navbar({
                 }`}
                 aria-label="Shopping bag"
               >
-                <ShoppingBag className="w-[18px] h-[18px] stroke-[1.5]" />
+                <ShoppingBag className="w-4 h-4 stroke-[1.35]" />
                 {cartCount > 0 && (
                   <span
-                    className={`absolute -top-1 -right-1 min-w-[15px] h-[15px] px-1 text-[9px] font-bold rounded-full flex items-center justify-center ${
+                    className={`absolute -top-1 -right-1 min-w-[13px] h-[13px] px-0.5 text-[8px] font-bold rounded-full flex items-center justify-center ${
                       isWhiteMode ? 'bg-black text-white' : 'bg-white text-black'
                     }`}
                   >
